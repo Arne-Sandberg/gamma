@@ -1,0 +1,49 @@
+{% extends 'templates/head/head.html' %}
+
+{% block body %}
+<SCRIPT>
+	
+	// GET FROM URL.-
+	params = getParameters()
+
+	// DELETE DUPLICATES.-
+	for (i=0; i<params.length; i++) { 
+		if ( !params[i][0] ) {
+			params[i] = false;
+		}
+		else if ( params[i][0] == "csrfmiddlewaretoken") {
+			params[i] = false;
+		}
+		else if ( params[i][0] == "amp;") {
+			params[i] = false;
+		}
+		else if ( params[i] ) { 
+			for (j=i+1; j<params.length; j++ ) {
+				if ( params[i][0] == params[j][0] ) {
+					params[i][1] = params[j][1];
+					params[j] = false ;	
+				}
+			}
+		}
+	}
+	// alert (JSON.stringify(params));
+
+	// FORM NEW URL STRING.-
+	var referer = document.referrer;
+	referer = referer.replace(/\?.*/g,""); 
+	var url = ""
+	for ( i=0 ; i<params.length; i++ ) {
+		if ( params[i] && params[i][0] != "redirect" )  {
+			url = params[i][0] + "=" + escape(params[i][1]) + "&" + url
+		}
+	}
+	var url = referer + "?" + url
+
+	// Redirect!
+	// alert (url);
+	location.href=url;
+
+</SCRIPT>
+{% endblock %}
+
+

@@ -1,0 +1,56 @@
+{% extends 'kain2/templates/section.html' %}
+{% block wtitle %} 		{{table.name}} {% endblock %}
+
+{% block section-subtitle %} 	
+	<!-- TITLE --> 
+	<A HREF='{% url 'kain_home' %}'>Kain/</A>
+	<A HREF='{% url "kain_folder" table.id %}'>{{table.name}}</A> 
+{% endblock %}
+
+{% block main-screen-tools %}
+	<!-- TOOLS --> 
+        <li><A HREF='{% url 'kain_edit' table.id %}' 				><span class="glyphicon glyphicon-cog"> Edit</span></a></li>
+        <li><A ONCLICK='confirmlink("{% url 'kain_delete' table.id %}");' 	><span class="glyphicon glyphicon-remove"> Remove</span></a></li>
+{% endblock %}
+{% block main-screen-read %}
+
+	<!-- DISPLAY LIST --> 
+	<TABLE ID='FOLDER' CLASS='table table-striped' >
+	<THEAD>
+		<TR CLASS='TABLEUNDERLINE'>
+			<TD>Name</TD>
+			<TD>URL</TD>
+			<TD>User</TD>
+			<TD>Pass</TD>
+			<TD>Tools</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+	</TBODY>
+	</TABLE>
+
+	<!-- INPUT: ADD BOOKMARK --> 
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				 	<span class="glyphicon glyphicon-plus"></span> 
+				</span>
+				<INPUT class="form-control" ID='ADD-BK' ONCHANGE='addB({{table.id}});'/> 
+			</div><!-- /input-group -->
+		</div><!-- /.col-lg-6 -->
+		<div class="col-lg-6">
+		</div><!-- /.col-lg-6 -->
+	</div><!-- /.row -->
+
+	<!-- JAVASCRIPT --> 
+	<SCRIPT>
+		{% for g in pageobj %} 
+			skelBookmark('{{g.id}}','{{g.name|default:""}}','{{g.user|default:""}}','{{g.password}}','{{g.url|default:""}}');
+		{% endfor %} 
+	</SCRIPT>
+
+	<!-- PAGER --> 
+	{% include 'templates/tools/paginator.html' %}
+
+{% endblock %}

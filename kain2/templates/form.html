@@ -1,0 +1,45 @@
+{% extends 'kain2/templates/section.html' %}
+{% block wtitle %} The Book of Kain {% endblock %}
+
+{% block section-subtitle %}
+        <!-- TITLE -->
+        <A HREF='{% url 'kain_home' %}'>Kain/</A>
+	{% if f.id %} 
+        	<A HREF='{% url "kain_folder" f.id %}'>{{f.name}}</A>
+	{% else %} 
+		<A HREF=''>New</A>
+	{% endif %} 
+{% endblock %}
+
+{% block main-screen-read %}
+
+	<FORM METHOD=POST>
+	<CENTER>
+        {% csrf_token %}
+	<TABLE CLASS=EDITFORM STYLE='width:50%;'>
+	<THEAD>
+		<TD COLSPAN=2>
+		{% if f.id %} 
+			<A HREF='/kain/folder/{{f.id}}/'>{{f.name}}</A>
+		{% else %}
+			New
+		{% endif %}
+		</TD>
+	</THEAD>
+	<TBODY>
+		{% for f in form %} 
+                <TR>
+                 	<TD>{{f.label}}</TD><TD ID='INPUT-{{f.label}}'>{{f}}</TD>
+                </TR>
+                <TR> <TD CLASS='ERR' COLSPAN=2>{{f.errors}}</TD> </TR>
+                {% endfor %}
+		<TR>
+                        <TD COLSPAN=2>
+				<button class="btn btn-lg btn-success" >Submit</button>	
+                        </TD>
+                </TR>
+	</TBODY>
+	</TABLE>
+	</FORM>
+
+{% endblock %}

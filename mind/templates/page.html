@@ -1,0 +1,38 @@
+{% extends 'mind/templates/section.html' %}
+{% block wtitle %} The Book of Mind {% endblock %}
+{% block section-subtitle %} 
+        <A HREF='{% url 'mind_home' %}'>Arkaine/</A>
+	{% if elem.chapter %} 
+        	<A HREF='{% url 'mind_chapter' elem.chapter.id %}'>{{elem.chapter.title}}/</A>
+	{% endif %} 
+	<A HREF='{% url 'mind_pread' elem.id %}'>{{elem.title|default:"New"}}</A>
+{% endblock %}
+{% load date %}
+{% block main-screen-read %}
+
+	<FORM METHOD=POST>
+        {% csrf_token %}
+                {{form.errors}}
+		<INPUT name='title' 	class='hid-input' value='{{elem.title}}' 	   placeholder='Title' 	autocomplete=off /> 
+                <INPUT name='date' 	class='hid-input' value='{{elem.date|formatdate}}' placeholder='Date' 	style='width:49%'  id='pagedate' autocomplete=off/>
+		<SELECT name='chapter' 	class='hid-input' value='1' 						style='width:48%;'>
+			{% for o in form.fields.chapter.queryset reversed %}
+				<OPTION VALUE='{{o.id}}' {% if o.id = elem.chapter.id %}selected="selected"{% endif %} >{{o.title}}</OPTION>
+			{% endfor %}
+		</SELECT>
+		<BR> 
+		<BR> 
+	        {% include 'templates/tools/ckeditor.html' with name='text' content=elem.text height='20em' %}
+		<BR> 
+		<BR> 
+		<button class="btn btn-lg btn-success" >Submit</button>
+	</FORM>
+	
+	<SCRIPT>
+		var current = {{elem.date|newjsdate}}
+		$( "#pagedate" ).datepicker({
+			changeMonth:true, changeYear:true,		
+		});
+	</SCRIPT>
+
+{% endblock %}

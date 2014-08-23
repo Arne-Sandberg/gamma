@@ -1,0 +1,21 @@
+{% extends 'login/templates/auth.html' %}
+{% block wtitle %} Register {% endblock %}
+{% block login_body %}
+	<FORM METHOD='POST' ACTION='' >
+	        {% csrf_token %}
+
+	        <div class="input-group input-group-lg">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                	<INPUT TYPE='TEXT' NAME='username' value='' AUTOCOMPLETE=OFF ID='usernamebox' PLACEHOLDER='Username' class="form-control" />
+                </div>
+
+                <div class="input-group input-group-lg">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-eye-open"></span></span>
+			<INPUT TYPE='MAIL' NAME='mail' 	value='' AUTOCOMPLETE=OFF ID='mailbox' PLACEHOLDER='Mail' class="form-control" />
+                </div>
+
+		<BUTTON ID='LEFT-BUTTON' >&phi;o!</BUTTON>
+	</FORM>
+	<A HREF='{% url 'login' %}'><BUTTON ID='RIGHT-BUTTON' >Lo&phi;in</BUTTON></A>
+{% endblock %}
+

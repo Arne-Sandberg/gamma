@@ -1,0 +1,233 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** * * 
+ *
+ * 	phi! style.css
+ *
+ * 	INDEX:
+ *	1.  GENERAL OPTIONS.-
+ *	2.  BOTTOM FOOTER.-
+ *	3.  MAIN CONTENT.-
+ *	4.  SEARCH/ DATE 
+ *	5.  MAIN LEFT CONTENT.-
+ *	6.  TABLES.-
+ *	7.  CUSTOM.-
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	1. GENERAL OPTIONS.-
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	* 								{ font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; }
+	HTML 								{ HEIGHT:100%; OVERFLOW-X:HIDDEN; }
+	BODY 								{
+										BACKGROUND-IMAGE:URL('/static/bg/gaussian-blur.jpg');
+										BACKGROUND-ATTACHMENT:FIXED; MARGIN:0 AUTO;
+										BACKGROUND-SIZE:100%; overflow:hidden;
+										BACKGROUND-POSITION:50%; WIDTH:100%;
+										BACKGROUND-REPEAT:NO-REPEAT;
+									}
+	A 								{ TEXT-DECORATION: NONE; COLOR: #333333; }
+	A:hover 							{ TEXT-DECORATION: UNDERLINE; }
+	HR								{ BORDER: 1px SOLID rgba(0,0,0,0.3); }
+	@media (max-width: 1550px  )    				{ BODY{ BACKGROUND-POSITION: 10% 10%; } }
+	@media (min-width: 1551px  )   					{ BODY{ BACKGROUND-POSITION: 0 0;  } }
+	INPUT, TEXTAREA, SELECT 					{
+										BACKGROUND-COLOR:#F3F3F3; POSITION:RELATIVE;
+										BORDER:1px SOLID #CDCDCD; OPACITY:0.7;
+										BORDER-RADIUS: NONE; PADDING:1%; 
+										FONT-SIZE:1.3em; COLOR:#232323; WIDTH: 98%;
+									}
+	SELECT 								{ WIDTH: 100%; }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	2. BOTTOM FOOTER.-
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	#FOOTER 							{
+										POSITION:RELATIVE;
+										box-shadow:0 0 20PX BLACK;
+										MARGIN:0px;
+										BORDER:1px SOLID #232323;
+										WIDTH:100%;
+										TEXT-ALIGN:LEFT;
+										PADDING:4%;	
+										HEIGHT:70%;
+										PADDING-TOP:5%;
+										COLOR:#CDCDCD;
+										BACKGROUND:#000100;
+									}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	3. MAIN CONTENT.-
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	@media (min-width: 0px    )     and (max-width: 380px)          { #MAIN-LEFT{WIDTH:100%;} #MAIN-RIGHT{WIDTH:100%;}}
+	@media (min-width: 381px  )     and (max-width: 550px)          { #MAIN-LEFT{WIDTH:100%;} #MAIN-RIGHT{WIDTH:100%;}}
+	@media (min-width: 551px  )     and (max-width: 768px)          { #MAIN-LEFT{WIDTH:100%;} #MAIN-RIGHT{WIDTH:100%;}}
+	@media (min-width: 769px  )     and (max-width: 1001px)         { #MAIN-LEFT{WIDTH:100%;} #MAIN-RIGHT{WIDTH:100%;}}
+	@media (min-width: 1000px )     and (max-width: 1550px)         { #MAIN-LEFT{WIDTH:100%;} #MAIN-RIGHT{WIDTH:100%;}}
+	@media (min-width: 1550px )     and (max-width: 2149px)         { #MAIN-LEFT{WIDTH:080%;} #MAIN-RIGHT{WIDTH:020%;}}
+	@media (min-width: 2150px )                                     { #MAIN-LEFT{WIDTH:085%;} #MAIN-RIGHT{WIDTH:015%;}}
+	#MAIN-LEFT							{ BACKGROUND: rgba(255,255,255,0.9); }
+	#MAIN 								{ POSITION: RELATIVE; WIDTH: 100%; HEIGHT:100%; }
+	#MAIN-LEFT							{ FLOAT:LEFT;  }
+	#MAIN-RIGHT							{ FLOAT:RIGHT; } 
+	@media (max-width: 1550px)     					{ #MAIN-RIGHT { background: rgba(255,255,255,0.3); } }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	4. SEARCH/DATE
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        #tools								{ margin:1%; cursor:pointer; }
+        #tools button                                                	{ font-size:1.3em !important; }
+        .dropdown-menu                                                  { width:100%; font-size:1.3em !important;}
+        .pagination                                                     { opacity:0.8 !important; cursor:pointer; }
+        .pagination *                                                   { color: black !important; }
+        #PAGER-CONTAINER .input-group                                   { width:100% !important; font-size:1.3em !important; border-radius:0%; }
+        #PAGER-CONTAINER .input-group *                                 { border-radius:0%; }
+        #PAGER-CONTAINER INPUT                                          { PADDING: 2% ; width:100% !important; background: white; color:black; }
+        #PAGER-CONTAINER                                                { OVERFLOW:HIDDEN; background: none; }
+	#DATE-DIV-NEXT, #DATE-DIV-PREV					{ cursor:pointer; }
+        .ui-autocomplete                                                { OPACITY:1.0 !important; }
+        .ui-autocomplete-category                                       { font-weight: bold; padding: .2em .4em; margin: .8em 0 .2em; line-height: 1.5; }
+        #ui-id-1                                                        { BACKGROUND: rgba(255,255,255,0.90) !important; }
+        .ui-autocomplete-category                                       { COLOR: rgba(0,0,0,0.8)!important; }
+        .ui-menu-item a                                                 { COLOR: rgba(0,0,0,0.7)!important; cursor: pointer; }
+        .ui-state-focus                                                 { COLOR: BLACK   !important; background: #EEEEEE !important; }
+        .ui-state-focus *                                               { COLOR: BLACK   !important; background: #EEEEEE !important; }
+        @media (min-width: 0px  )   and (max-width: 1000px)             { .ui-autocomplete{ WIDTH: 99% !important;  } }
+        @media (min-width: 1001px ) and (max-width: 1550px)             { .ui-autocomplete{ WIDTH: 49% !important;  } }
+        @media (min-width: 1550px ) and (max-width: 2149px)             { .ui-autocomplete{ WIDTH: 19% !important;  } }
+        @media (min-width: 2150px )                                     { .ui-autocomplete{ WIDTH: 14% !important;  } }
+        @media (min-width: 0px  )   and (max-width: 1000px)             { .ui-datepicker { FONT-SIZE:1.5em; WIDTH: 96% !important;  } }
+        @media (min-width: 1001px ) and (max-width: 1550px)             { .ui-datepicker { FONT-SIZE:1.3em; WIDTH: 45% !important;  } }
+        @media (min-width: 1550px ) and (max-width: 2149px)             { .ui-datepicker { FONT-SIZE:1.3em; WIDTH: 16% !important;  } }
+        @media (min-width: 2150px )                                     { .ui-datepicker { FONT-SIZE:1.3em; WIDTH: 11% !important;  } }
+        .ui-datepicker-title, .ui-datepicker-header,                    { background:none !important; border:none !important; }
+        .ui-datepicker-div, .ui-icon                                    { background:none !important; border:none !important; }
+        .ui-datepicker-prev:hover,.ui-datepicker-next:hover             { background-color:none !important; border:none !important; }
+        .ui-state-hover                                                 { background: none !important; }
+        .ui-datepicker-title                                            { padding: 0% 3% 0% 3% !important; background:none!important; }
+        .ui-datepicker                                                  {
+                                                                                border:2px solid gray-datepicker !important;
+                                                                                border-radius: 6px !important; Z-INDEX: 3000;
+                                                                                box-shadow: 0 0 10px gray; padding: 1% !important;
+                                                                                BACKGROUND: rgba(255,255,255,0.90) !important;
+                                                                                background-size: 100% !important; margin:1%;
+                                                                                background-repeat: no-repeat !important;
+                                                                        }
+        #date-tips:hover                                                { _opacity: 0.001; }
+        #date-tips img:hover                                            { opacity: 1.00; }
+        #date-tips img                                                  { opacity: 0.50; cursor:pointer; }
+        #date-tips                                                      {
+                                                                                BACKGROUND: rgba(0,0,0,0.90); opacity:0.9;
+                                                                                display: hidden !important; BORDER-RADIUS: 16px;
+                                                                                position: fixed; COLOR: #DED3D3; right: 15px;
+                                                                                PADDING: 1%; top: 34px; Z-INDEX: 100;
+                                                                        }
+        .ui-datepicker-prev,.ui-datepicker-next                         {
+                                                                                background-repeat: no-repeat !important; cursor: pointer;
+                                                                                background-size: 120% !important; height:96% !important;
+                                                                                background-color:none!important; padding: 0% !important;
+                                                                                border-radius: 20% !important; width:8% !important;
+                                                                        }
+        .ui-datepicker-prev,.ui-datepicker-prev:hover                   {
+                                                                                background-image: url('/static/img/prev.png') !important;
+                                                                                background-position: 0% 50% !important; background-repeat: no-repeat;
+                                                                                background-size: 100% 100% !important; top: 2px !important;
+                                                                                background-color: none !important; left: -1px !important;
+                                                                        }
+        .ui-datepicker-next:hover, .ui-datepicker-next                  {
+                                                                                background-image: url('/static/img/next.png') !important;
+                                                                                background-color: none !important; background-repeat: no-repeat;
+                                                                                background-position: 100% 50% !important; top: 2px !important;
+                                                                                background-size: 100% 100% !important; right:0% !important;
+                                                                        }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	5. MAIN LEFT CONTENT.-
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	#SECTION-SUBTITLE 						{ FONT-SIZE:0.6em; DISPLAY: BLOCK; OPACITY:0.3; }
+	#SECTION-IMG 							{ WIDTH: 6em !important; margin-top:1%; float: left; opacity:0.9; }
+	#SECTION-TITLE-CONTAINER					{ 
+										background: rgba(255,255,255,0.6); BORDER-BOTTOM: 1px solid #CDCDCD; 
+										BORDER-TOP: 1px SOLID #CDCDCD; PADDING:2%; DISPLAY: BLOCK; 
+									}
+	#SECTION-TITLE 							{ FONT-SIZE:3em; PADDING: 1%; COLOR: #333333; }
+	#SECTION-TITLE 							{ float: left; width: 70%; }
+	#MAIN-CONTENT 							{ padding: 1%; PADDING-BOTTOM: 10%; VERTICAL-ALIGN: text-top !important; overflow:hidden;} 
+	#SCREEN								{ MIN-HEIGHT: 15em; padding-top:1%; }
+	@media (max-width: 1000px) 					{ #GRAPHS DIV { HEIGHT:20em; } }
+	@media (min-width: 1001px ) and (max-width: 1550px) 		{ #GRAPHS DIV { HEIGHT:35em; } }
+	@media (min-width: 1550px ) and (max-width: 2149px) 		{ #GRAPHS DIV { HEIGHT:35em; } } 
+	@media (min-width: 2150px ) 					{ #GRAPHS DIV { HEIGHT:45em; } }
+	#GRAPHS 							{ OPACITY:0.8; HEIGHT:50%; margin:1% 0%;}
+	@media (max-width:1000px)					{ .floating-content { display:block; width: 98%; } }
+	@media (min-width:1001px)					{ .floating-content { float:left; width: 46%; margin:1%; } }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	6. TABLES.-
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	TABLE 								{ POSITION:RELATIVE; WIDTH:100%; border-spacing:0px; }
+	TABLE THEAD TR TD IMG						{ FLOAT:RIGHT; }
+	TABLE THEAD TR TD * 						{ COLOR: #C5C5C5; }
+	TABLE THEAD TR TD  						{ FONT-WEIGHT: BOLD; }
+	.UNDERLINE 							{ BACKGROUND-COLOR:rgba(51,51,51,0.7); }
+	.HOVER-ROWS TBODY TR:hover TD					{ BACKGROUND:rgba(53,53,53,0.1);}
+	.FIXED-TABLE 							{
+										TABLE-LAYOUT:FIXED; border-collapse:separate;
+										border-spacing:0px; width: 100%; MARGIN-BOTTOM: 2%;
+									}
+	.TABLEUNDERLINE TD 						{ 
+										BORDER-BOTTOM:2px SOLID rgba(0,0,0,0.3); CURSOR:POINTER; FONT-SIZE: 1.5em; 
+										FONT-WEIGHT:BOLD; PADDING-BOTTOM:0.5% !important; padding: 3% 0% 1% 0% !important;
+									}
+	TABLE THEAD TR TD * 						{ color: rgba(0,0,0,0.8); }
+	.EDITFORM							{ 
+										BACKGROUND: rgba(255,255,255,0.7); 
+										TABLE-LAYOUT:FIXED; border-collapse:separate;
+										border-spacing: 0px; width: 100%; padding: 2%;
+										border: 1px solid rgba(0,0,0,0.2);
+									}
+	.EDITFORM TD							{ vertical-align: top; font-size: 1.3em; padding: 1% 0%; }
+	.EDITFORM THEAD TD						{ border-bottom: 3px solid rgba(0,0,0,0.6); font-size: 1.5em; padding:3% 0%; }
+	.EDITFORM .BUT							{ text-align: center; padding:5%;}
+	.EDITFORM BUTTON						{ border-radius:6px; padding:2%;}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 
+ *	7. CUSTOM
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	.badge								{ float:right; border-radius:0%; }
+	label 								{ display: inline-block !important; width: 5em !important; opacity: 0.8 !important;}
+	.errorlist LI, .errorlist 					{ DISPLAY:BLOCK !important; COLOR:RED !important; }
+	.clear-both 							{ CLEAR: BOTH !important; height:0% !important; }
+	RIGHT, .RIGHT, .RIGHT *						{ TEXT-ALIGN: RIGHT !important; }
+	LEFT, .LEFT, .LEFT * 						{ TEXT-ALIGN:LEFT !important; }
+	.CENTER 							{ TEXT-ALIGN:CENTER !important; }
+	.CURSOR 							{ CURSOR:POINTER !important; }
+	.EXPAND 							{ WIDTH: 100% !important; HEIGHT: 100% !important; }
+	.HIDDEN 							{ DISPLAY: NONE; }
+	.INLINE 							{ DISPLAY: INLINE; }
+	.TINY								{ FONT-SIZE:0.8em !important;}
+	.FIXED								{ POSITION: FIXED; }
+	.BLOCK  							{ DISPLAY: BLOCK; }
+	.NO-BORDER 							{ BORDER-RADIUS: 0px !important; BORDER: NONE !important; }
+	.NO-BACKGROUND 							{ BACKGROUND: NONE !important; }
+	.OVERFLOW							{ OVERFLOW: HIDDEN ;} 
+	RED								{ COLOR: RED; }
+	.SMALLICON 							{ POSITION:RELATIVE;	MARGIN-BOTTOM:-2%; WIDTH:50%; }
+	.ui-tabs-nav 							{background:rgba(0,0,0,0.6)!important; }
+	.alert 								{ margin:0%; }
+	.navbar 							{ margin:0% !important; font-size:1.5em; }	

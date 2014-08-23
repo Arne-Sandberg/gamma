@@ -1,0 +1,29 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * LOGIN
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+BODY 							{
+        							BACKGROUND-IMAGE:URL("/static/bg/gaussian-blur.jpg"); 
+        							BACKGROUND-ATTACHMENT:FIXED; BACKGROUND-REPEAT:NO-REPEAT; 
+        							BACKGROUND-SIZE:100%; BACKGROUND-POSITION:0px -60px; 
+							}
+#loginbox 						{ 	
+								background-color: rgba(255,255,255,0.4); box-shadow: 0 0 5px rgba(255,255,255,0.9); 
+								border-bottom-left-radius:40px;
+								border-bottom-right-radius:40px;
+							}
+#loginbox * 						{ opacity:0.9;  }
+BUTTON:hover, BUTTON:active, BUTTON:focus		{ box-shadow: 0 0 5px rgba(255,255,255,0.9); }
+BUTTON:active, BUTTON:focus				{ box-shadow: none; } 
+INPUT:active,  INPUT:focus				{ box-shadow: none; } 
+@media (max-width: 1000px) 				{ #loginbox { width:100%; } }
+@media (min-width: 1000px) 				{ #loginbox { width:40%; margin-left:10%; padding-top:5%; } }
+@media (max-width: 1000px) 				{ #login_title { margin-top:5%; }  }
+@media (min-width: 1000px) 				{ #login_title { margin-top:20%; } }
+#login_box BUTTON, #login_box INPUT 			{ BACKGROUND-COLOR: rgba(255,255,255,0.4); COLOR:#333333; }
+#login_title						{ height:10em !important; } 
+#ltitle-div 						{ position:relative; display:block; width:100%; text-align:center;  }
+#login_box button 					{ border:none; width:100% !important; border-radius:0%; font-size:1.3em; padding:1%; }
+#login_box 						{ font-size:1.1em !important; position:relative; text-align:center; padding:00% 10% 10% 10% }
+.input-group 						{ width:100% !important; }
+.input-group * 						{ border-radius:0% !important; }
+.input-group input 					{ width:100% !important; }

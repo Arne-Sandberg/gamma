@@ -1,0 +1,43 @@
+{% extends 'kain2/templates/section.html' %}
+{% block wtitle %} 		Root {% endblock %}
+{% block section-subtitle %} 	Root {% endblock %}
+{% block main-screen-tools %}
+        <li><A HREF='{% url 'kain_add' %}' CLASS='IMGDIV'>  <span class="glyphicon glyphicon-plus"></span> New folder </span></a></li>
+{% endblock %}
+{% block main-screen-read %}
+
+	<!-- DISPLAY LIST --> 
+	<DIV ID='ROOT-CONTAINER'>
+
+		<!-- BOOKMARKS --> 
+		<A HREF='https://www.facebook.com/'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/facebook.png' /></DIV></A>
+		<A HREF='https://www.google.com/calendar/render'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/gcalendar.png' /></DIV></A>
+		<A HREF='https://github.com/Gartlar'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/github.png' /></DIV></A>
+		<A HREF='https://drive.google.com/#my-drive'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/gdrive.png' /></DIV></A>
+		<A HREF='https://play.google.com/apps/publish/'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/gplay.png' /></DIV></A>
+		<A HREF='https://mail.google.com/mail/u/0/?pli=1#inbox'><DIV CLASS='ROOT-FOLDER'> <h2></h2> <img src='{{STATIC_URL}}img/gmail.png' /></DIV></A>
+		<A HREF='https://www.youtube.com/'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/youtube.png' /></DIV></A>
+		<A HREF='https://www.accessbanking.com.ar/RetailHomeBankingWeb/init.do'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/icbc.png' /></DIV></A>
+		<A HREF='https://www.invertironline.com/invertir/default.asp'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/IOL.png' /></DIV></A>
+		<A HREF='https://maps.google.com.ar/'><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/gmaps.png' /></DIV></A>
+		<!-- TEMPLATE 
+		<A HREF=''><DIV CLASS='ROOT-FOLDER'><h2></h2> <img src='{{STATIC_URL}}img/gcalendar.png' /></DIV></A>
+		--> 
+
+		<!-- DATABASE FOLDERS --> 
+		<DIV class='clear-both'></DIV>
+		{% for k in pageobj %} 
+			<A HREF='{% url 'kain_folder' k.id %}'>
+			<DIV CLASS='ROOT-FOLDER'>
+				<h2>{{k}}</h2>
+				<img src='{{STATIC_URL}}img/nstar.png' />
+			</DIV>
+			</A>
+		{% endfor %} 
+		<DIV class='clear-both'></DIV>
+	</DIV>
+
+	<!-- PAGER --> 
+	{% include 'templates/tools/paginator.html' %}
+
+{% endblock %}

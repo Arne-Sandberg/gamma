@@ -1,0 +1,19 @@
+{% extends 'mind/templates/section.html' %}
+{% block wtitle %} {{chapter.title}} {% endblock %}
+{% block section-subtitle %} 
+        <!-- TITLE -->
+        <A HREF='{% url 'mind_home' %}'>Library/</A>
+        <A HREF='{% url "mind_chapter" chapter.id %}'>{{chapter.title}}</A>
+{% endblock %}
+{% block main-screen-read %}
+
+	<center>
+	<form method="post" enctype="multipart/form-data" STYLE='width:50%;'>
+        {% csrf_token %}
+		<INPUT NAME='image' TYPE='FILE' VALUE=''/>
+		<BR>
+		<BR>
+		<button class="btn btn-lg btn-success" >Submit</button>
+	</FORM>
+
+{% endblock %}

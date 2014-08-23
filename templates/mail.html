@@ -1,0 +1,22 @@
+{% extends 'templates/simple.html' %}
+{% block body %}
+
+	<!-- PRINT DIV --> 
+	<DIV ID='mail' STYLE='
+				background:#CBDAAA; width:95%; position:relative; left:0px; top:0%; padding:2%; BORDER-RADIUS:5px; 
+				display:block; font-family: Calibri; height:100%; COLOR:BLACK; BORDER: 1px SOLID rgba(0,0,0,0.5); 
+	'>
+
+		<!-- HEADER -->
+		<DIV ID='mail-title' STYLE='
+					text-align:center; font-size:7em; border-bottom:0px solid rgba(0,0,0,0.5);
+					font-weight:bold; margin:6% 0%; 
+			'>
+			&phi;hi!
+		</DIV>
+
+		<!-- BODY --> 
+		{% block mail%} {% endblock %}
+	</DIV>
+
+{% endblock %}

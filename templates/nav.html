@@ -1,0 +1,44 @@
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container-fluid">
+
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+	    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+	      	</button>
+		<A class="navbar-brand" HREF='{% url 'home' %}'><span class="glyphicon glyphicon-home"> <b>&phi;hi!</b></span></A>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	
+
+		<!-- LEFT NAV --> 
+		<ul class="nav navbar-nav navbar-left">
+			{% if perms.admin.sabbat_W %}     
+			<li><A HREF="{% url 'kain_home'     %}" > <span class="glyphicon glyphicon-star"> Kain</span></A></li>
+			<li><A HREF="{% url 'goals_home'    %}" > <span class="glyphicon glyphicon-leaf"> Goals</span></A></li>
+			<li><A HREF="{% url 'kaizen_home'   %}" > <span class="glyphicon glyphicon-fire"> Kaizen</span></A></li>
+			<li><A HREF="{% url 'mind_home'     %}" > <span class="glyphicon glyphicon-tower"> Mind</span></A></li>
+			{% endif %}
+			{% if perms.admin.sabbat_R %}     
+			<li><A HREF="{% url 'sabbat_home'   %}" > <span class="glyphicon glyphicon-usd"> Sabbat</span></A></li>
+			{% endif %}
+		</ul>
+	
+		<!-- RIGHT NAV --> 
+		<ul class="nav navbar-nav navbar-right">
+                        {% if request.user.username %}
+                        <LI><A HREF='/users/{{request.user.username}}/'><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</A></LI>
+                        <LI><A HREF='{% url 'logout' %}'><span class="glyphicon glyphicon-log-out"> Logout</span></A></LI>
+                        {% else %}
+                        <LI><A CLASS='BLOCK-HREF' HREF='{% url 'login' %}/'><span class="glyphicon glyphicon-log-in"> Login</span></A></LI>
+ 			{% endif %}
+	      	</ul>
+	</div><!-- /.navbar-collapse -->
+
+</div><!-- /.container-fluid -->
+</nav>

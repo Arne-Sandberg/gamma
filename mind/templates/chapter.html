@@ -1,0 +1,52 @@
+{% extends 'mind/templates/section.html' %}
+{% block wtitle %} {{chapter.title}} {% endblock %}
+{% load date %}
+
+{% block section-subtitle %} 	
+	<A HREF='{% url 'mind_home' %}'>Arkaine/</A>
+	<A HREF=''>{{chapter.title}}</A>
+{% endblock %}
+
+{% block main-screen-tools %}
+	<!-- TOOLS --> 
+	<li><A HREF='{% url "mind_padd" %}' 				><span class="glyphicon glyphicon-plus"> Write</span><a></li>
+	<li><A HREF='{% url "mind_avatar" chapter.id %}'  		><span class="glyphicon glyphicon-th-large"> Avatar</span><a></li>
+	<li><A HREF='{% url "mind_edit" chapter.id %}'  		><span class="glyphicon glyphicon-cog"> Edit</span><a></li>
+	<li><A onclick='confirmlink("{% url "mind_del" chapter.id%}");' ><span class="glyphicon glyphicon-remove"> Delete</span><a></li>
+{% endblock %}
+
+{% block main-screen-read %}
+
+        <!-- BOOTSTRAP THUMBNAILS --> 
+        <div class="row">
+
+		<!-- CHAPTER --> 
+		<div class="col-xs-6 col-md-6">
+		<A HREF='{% url "mind_avatar" chapter.id %}' class="thumbnail">
+			<IMG SRC='/media/{{chapter.image.img.name|default:"/static/img/mpuzzle.png"}}'>
+			<CENTER>
+			<h2>{{chapter.number|add:1}} {{chapter.title|default:"Title"}}</h2>
+			<p>{{chapter.subtitle|default:"Subtitle"}}</p>
+			</CENTER>
+		</a>
+		</div>
+
+		<!-- PAGES --> 
+		{% for c in table reversed %} 
+			<div class="col-xs-6 col-md-3">
+			<CENTER>
+			<A HREF='{% url "mind_pread" c.id %}' class="thumbnail" >
+				<img src="{{STATIC_URL}}img/mjournal.png" style='height:8em;' >
+				<h3>{{c.title|default:"Title"}}</h3>
+				<p>{{c.date|formatdate}}</p>
+			</a>
+			</CENTER>
+			</div>
+		{% endfor %} 
+
+        </div> <!-- END OF THUMBNAILS --> 
+
+
+	<!-- CHAPTER IMAGE --> 
+
+{% endblock %}

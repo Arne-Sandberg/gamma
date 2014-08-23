@@ -1,0 +1,49 @@
+{% extends 'templates/simple.html' %}
+{% block head %} 
+
+	<!-- *********************************************************
+	* PLUGINS.-
+	*********************************************************** --> 
+
+		<!-- JQUERY -->
+		<SCRIPT NAME='JQUERY' SRC="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"	></SCRIPT>
+
+		<!-- GOOGLE CHARTS -->
+		<SCRIPT NAME='GCHARTS' SRC="https://www.google.com/jsapi"                     			></SCRIPT>
+
+		<!-- BOOTSTRAP -->
+		<SCRIPT	NAME='BOOTSTRAP' SRC="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<LINK NAME='BOOTSTRAP' REL="stylesheet" TYPE='TEXT/CSS' HREF="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<LINK NAME='BOOTSTRAP' REL="stylesheet" TYPE='TEXT/CSS' HREF="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+		<!-- JQUERY UI-->
+		<SCRIPT NAME='JQUERY-UI' SRC='http://code.jquery.com/ui/1.10.3/jquery-ui.js' ></SCRIPT>
+		<LINK NAME='JQUERY-UI' REL='stylesheet' TYPE='TEXT/CSS' HREF='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' />
+
+	<!-- *********************************************************
+	* ONLOAD.-
+	*********************************************************** --> 
+	<SCRIPT NAME='ONLOAD'>
+		$(document).ready(function() { 
+			{% block javascript-onload %} {% endblock %} 
+			$( "#tabs" ).tabs();
+		});
+		window.MEDIA_URL 	= '{{MEDIA_URL}}';  
+		window.STATIC_URL   	= '{{STATIC_URL}}';  
+		window.QUERY_STRING 	= '{{request.META.QUERY_STRING}}';
+	</SCRIPT>
+
+	<!-- *********************************************************
+	* PHI.-
+	*********************************************************** --> 
+	
+		<!-- GENERAL --> 
+		<LINK 	NAME='PHI' REL="stylesheet" TYPE='TEXT/CSS' HREF="{{STATIC_URL}}css/style.css" />
+		<SCRIPT NAME='PHI' SRC="{{STATIC_URL}}js/charts.js" ></SCRIPT>
+		<SCRIPT NAME='PHI' SRC='{{STATIC_URL}}js/shared.js'></SCRIPT>
+
+		<!-- APPLICATION --> 
+		{% block custom-css %} {% endblock %} 
+		{% block custom-js %} {% endblock %}
+
+{% endblock %} 

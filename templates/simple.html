@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+
+	<!-- *********************************************************
+	*
+	*	META DATA 
+	*
+	*********************************************************** --> 
+	<TITLE> {% block wtitle %} {% endblock %} </TITLE>
+	<meta charset="utf-8">
+	<LINK NAME='FAVICO' REL="icon" TYPE="image/x-icon" HREF="{{STATIC_URL}}img/favicon.ico"    />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- *********************************************************
+	*
+	*	JAVASCRIPT AND CSS 
+	*
+	*********************************************************** --> 
+	{% block head %} 
+	{% endblock %} 
+
+</HEAD>
+<BODY>
+
+	<!-- *********************************************************
+	*
+	*	MAIN.-
+	*
+	*********************************************************** --> 
+	{% block body %} {% endblock %}
+
+</BODY>
+</HTML>

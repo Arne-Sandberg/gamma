@@ -1,0 +1,12 @@
+{% extends 'templates/head.html' %}
+{% block custom-js %}  <SCRIPT NAME='LOGIN'   SRC='{{STATIC_URL}}js/auth.js'></SCRIPT>		 	{% endblock %}
+{% block custom-css %} <LINK   NAME='LOGIN'   REL="stylesheet" HREF="{{STATIC_URL}}css/auth.css" /> 	{% endblock %}
+{% block body %}
+	<DIV CLASS='HIDDEN' ID='loginbox'>	
+		<DIV ID='ltitle-div'><IMG ID='login_title' SRC='{{STATIC_URL}}img/phi-green.png'> </DIV>
+		<DIV ID='login_box'>	
+		        <h2 CLASS='errorlist' >{{message}}</h2>
+			{% block login_body %} {% endblock %}
+		</DIV>
+	</DIV>
+{% endblock %}

@@ -1,0 +1,22 @@
+
+/* ROOT */
+#ROOT-CONTAINER {}
+#ROOT-CONTAINER .ROOT-FOLDER { 
+	opacity:0.8; cursor:pointer; text-align:center; 
+	float:left; width:19.8%; border:1px solid rgba(0,0,0,0.2);
+	margin:0%; _border-radius:20%;
+	padding-bottom:2%;
+}
+#ROOT-CONTAINER .ROOT-FOLDER IMG { width:50%; }
+#ROOT-CONTAINER .ROOT-FOLDER:hover { 
+		opacity:0.9; background-color:rgba(255,255,255,0.9);
+		box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* FOLDER */
+#FOLDER {}
+#FOLDER TBODY TR TD { overflow:hidden;} 
+#FOLDER TBODY TR TD INPUT { margin:0%; padding:4% 1% !important}
+#FOLDER .TOOLS { cursor:pointer; font-size:1.3em; height:4em; }
+#FOLDER .TOOLS span { padding-right:5%; }
+#FOLDER TBODY TR:hover TD { background:rgba(0,0,0,0.1) }

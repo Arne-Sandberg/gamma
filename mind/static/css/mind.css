@@ -1,0 +1,30 @@
+
+/* BOOK */
+#CHAPTER-CONTAINER {}
+
+.CHAPTER { 
+	margin: 3%; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.5); opacity:0.8; float:left; 
+	background-position: 50% 50%; background-size: auto 100%; background-repeat: no-repeat;
+}
+@media (max-width: 1000px) { .CHAPTER { width:92%; height:10em; } }
+@media (min-width: 1001px) { .CHAPTER { width:27%; height:20em; } }
+
+.CHAPTER:hover { opacity:1.0; }
+.CHAPTER-TITLE-CONTAINER { float: left; background: rgba(255,255,255,0.0); width: 100%; visibility: hidden;  }
+.CHAPTER:hover .CHAPTER-TITLE-CONTAINER { background: rgba(255,255,255,0.4); visibility: visible; }
+.CHAPTER-TITLE { font-size: 2.5em; margin:1%; }
+.CHAPTER-NUMBER{ font-size: 1.2em; margin:1%; font-style: italic;}
+.CHAPTER-SUBTITLE { font-size: 1.5em; margin:1%; font-style: italic;}
+
+/* CHAPTER */
+A:hover { text-decoration: none; }
+#PAGE-CONTAINER { }
+.PAGE:hover {opacity: 1.0; box-shadow: 0 0 10px rgba(0,0,0,0.6); }
+.PAGE { background-color: rgba(0,0,0,0.1); opacity:0.8; width: 20.5%; padding:1%; cursor: pointer; float:left; margin:1%; height:7em; border:1px solid rgba(0,0,0,0.1)}
+.PAGE-TITLE { font-size: 1.3em; font-weight:bold;}
+.PAGE-DATE { opacity:0.8; font-style:italic; }
+.CHAPTER-PORTRAIT { text-align: center; width: 96%; height:40em; overflow:hidden; border:1px solid rgba(0,0,0,0.1); margin:1%;  }
+.CHAPTER-PORTRAIT img { width:auto; height:100%; margin-top:-00%; }
+
+/* Page */
+.PAGE-TEXT { width:98%; padding:1%; border-radius:4px; border: 1px solid rgba(0,0,0,0.1);} 

@@ -1,0 +1,7 @@
+{% extends 'templates/main.html' %}
+{% block section-title %} 	The Book of Kain 									{% endblock %}
+{% block search %} 		{% include 'templates/tools/search.html' with autocomplete_url="/data/cgi/search/" %} 	{% endblock %}
+{% block custom-js %}  		<SCRIPT  NAME='KAIN'   SRC='{{STATIC_URL}}js/data.js'> </SCRIPT>           		{% endblock %}
+{% block custom-css %} 		<LINK    NAME='KAIN'   REL="stylesheet" HREF="{{STATIC_URL}}css/data.css"     /> 	{% endblock %}
+{% block section-img %} 	{{STATIC_URL}}img/potion.png                                                       	{% endblock %}
+

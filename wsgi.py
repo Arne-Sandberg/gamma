@@ -1,5 +1,5 @@
 """
-WSGI config for phi project.
+WSGI config for gamma project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 
 import os
 import sys
-sys.path.append('/opt/phi')
+sys.path.append('/opt/gamma')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 from django.core.wsgi import get_wsgi_application

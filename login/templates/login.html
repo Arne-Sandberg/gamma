@@ -1,23 +1,26 @@
-{% extends 'login/templates/auth.html' %}
+{% extends 'templates/head.html' %}
 {% block wtitle %} Login {% endblock %}
-{% block login_body %}
-	<FORM METHOD='POST' ACTION='' >
-	{% csrf_token %}
-	
-		<div class="input-group input-group-lg">
-  			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-			<INPUT TYPE='TEXT' class="form-control" NAME='username' value='' ID='usernamebox' PLACEHOLDER='Username' />	
-		</div>
-
-		<div class="input-group input-group-lg">
-  			<span class="input-group-addon"><span class="glyphicon glyphicon-eye-open"></span></span>
-			<INPUT TYPE='PASSWORD' NAME='password' class="form-control" value='' ID='passwordbox' PLACEHOLDER='Password' 	/>	
-		</div>
-
-		<BUTTON ID='LEFT-BUTTON' >Lo&phi;in!</BUTTON>
-
-	</FORM>
-	<A HREF='{% url 'register' %}'><BUTTON ID='RIGHT-BUTTON' >Re&phi;ister</BUTTON></A>
-
+{% block custom-js %}  <SCRIPT NAME='LOGIN'   SRC='{{STATIC_URL}}js/auth.js'></SCRIPT>		 	{% endblock %}
+{% block custom-css %} <LINK   NAME='LOGIN'   REL="stylesheet" HREF="{{STATIC_URL}}css/auth.css" /> 	{% endblock %}
+{% block body %}
+	<DIV CLASS='HIDDEN' ID='loginbox'>	
+		<DIV ID='ltitle-div'><IMG ID='login_title' SRC='{{STATIC_URL}}img/phi-green.png'> </DIV>
+		<DIV ID='login_box'>	
+		        <h2 CLASS='errorlist' >{{message}}</h2>
+			<FORM METHOD='POST' ACTION='' >
+			{% csrf_token %}
+			
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+					<INPUT TYPE='TEXT' class="form-control" NAME='username' value='' ID='usernamebox' PLACEHOLDER='Username' />	
+				</div>
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-eye-open"></span></span>
+					<INPUT TYPE='PASSWORD' NAME='password' class="form-control" value='' ID='passwordbox' PLACEHOLDER='Password' 	/>	
+				</div>
+				<BUTTON ID='LEFT-BUTTON' >Lo&phi;in!</BUTTON>
+			</FORM>
+			<A HREF='{% url 'register' %}'><BUTTON ID='RIGHT-BUTTON' >Re&phi;ister</BUTTON></A>
+		</DIV>
+	</DIV>
 {% endblock %}
-

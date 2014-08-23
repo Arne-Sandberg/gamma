@@ -47,33 +47,6 @@
 
 			<!-- *********************************************************
 			*
-			*	TOOLS
-			*
-			*********************************************************** --> 
-			<div class="dropdown" id='tools'>
-  				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-					<span class="glyphicon glyphicon-cog"></span> Tools
-    					<span class="caret"></span>
-  				</button>
-  				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-					<!--
-    					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-					-->
-					{% block main-screen-tools  %}{% endblock %} 
- 				</ul>
-				<script>
-					// This will hide the tools button if there are no
-					// options available for this app.-
-					$(window).load(function(){
-						var t = $('#tools .dropdown-menu li');
-						if (t[0] == undefined ) 
-							$('#tools').hide();
-					});
-				</script>
-			</div>
-
-			<!-- *********************************************************
-			*
 			*	MESSAGES.-
 			*
 			*********************************************************** --> 
@@ -106,7 +79,6 @@
 				<IMG ALT="" ID='SECTION-IMG' SRC='{% block section-img %}{% endblock %}'>
 				<DIV ID='SECTION-TITLE'>
 					<b> {% block section-subtitle %} {% endblock %} </b>
-					<SPAN ID='SECTION-SUBTITLE'> {% block section-title %} {% endblock %}</SPAN>
 				</DIV>
 				<DIV CLASS='clear-both'></DIV>
 			</DIV>
@@ -116,22 +88,7 @@
 			*	MAIN CONTENT
 			*
 			*********************************************************** --> 
-			<DIV ID='MAIN-CONTENT'>
-
-				<!-- *********************************************************
-				* APP CONTENT.-
-				*********************************************************** --> 
-				<DIV ID='APP-CONTENT'>	
-					<DIV ID='GRAPHS'> {% block main-screen-chart  %}{% endblock %} </DIV>
-					<DIV ID='SCREEN'> {% block main-screen-read   %}{% endblock %} <DIV class='clear-both'></DIV></DIV>
-				</DIV>
-
-				<!-- *********************************************************
-				* EMPTY DIV (Used to calculate sizes by jQuery.-
-				*********************************************************** --> 
-				<DIV ID='EMPTY-CONTENT'></DIV>
-
-			</DIV>
+			<DIV ID='MAIN-CONTENT'> {% block main-screen-read   %}{% endblock %} </DIV>
 
 		</DIV>
 
@@ -146,9 +103,6 @@
 	*********************************************************** --> 
 	<DIV ID='FOOTER'>
 		{% block footer %}{% endblock %} 
-		<CENTER>
-			<h2 CLASS='ITALIC'>{{random_phrase}}</h2>
-		</CENTER>
 	</DIV>
 
 {% endblock %}

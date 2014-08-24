@@ -22,87 +22,49 @@
 
 	<!-- *********************************************************
 	*
-	*	MAIN DEVICE.-
+	*	PROGRESS.-
 	*
 	*********************************************************** --> 
-	<DIV ID='MAIN'>
+	<div class="progress">
+  		<div class="progress-bar progress-bar-striped active"  role="progressbar" id='main-progress'
+		aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+  		</div>
+	</div>
 
-		<!-- *********************************************************
-		*
-		*	RIGHT BAR.-
-		*
-		*********************************************************** --> 
-		<DIV ID='MAIN-RIGHT'>
+	<!-- *********************************************************
+	*
+	*	MESSAGES.-
+	*
+	*********************************************************** --> 
+	{% for m in messages %}
+	<div class="alert alert-dismissible
+			{% if m.tags = "success" %} alert-success {% endif %} 
+			{% if m.tags = "error"   %} alert-danger  {% endif %} 
+			{% if m.tags = "warning" %} alert-warning {% endif %} 
+		" role="alert">
+		{{m}}
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+		<span class="sr-only">Cerrar</span></button>
+	</div>
+	{% endfor %} 
 
-			<!-- *********************************************************
-			*
-			*	SEARCH AND DATE.-
-			*
-			*********************************************************** --> 
-			<DIV ID='PAGER-CONTAINER'>
-				<DIV ID='SEARCHDIV'	><FORM METHOD='GET'>{% block search %}{% endblock %}</FORM></DIV>
-				<DIV ID='DATEDIV'	><FORM METHOD='GET'>{% block datediv %}{% endblock %}</FORM></DIV>
-				<div class="clear-both"></div>
-			</DIV>
-
-			<!-- *********************************************************
-			*
-			*	MESSAGES.-
-			*
-			*********************************************************** --> 
-			{% for m in messages %}
-			<div class="alert alert-dismissible
-					{% if m.tags = "success" %} alert-success {% endif %} 
-					{% if m.tags = "error"   %} alert-danger  {% endif %} 
-					{% if m.tags = "warning" %} alert-warning {% endif %} 
-				" role="alert">
-				{{m}}
-				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;
-			</div>
-			{% endfor %} 
-
-		</DIV>
-
-		<!-- *********************************************************
-		*
-		*	MAIN LEFT DIV.-
-		*
-		*********************************************************** --> 
-		<DIV ID='MAIN-LEFT'>
-
-			<!-- *********************************************************
-			*
-			*	SECTION IMAGE AND TITLE.-
-			*
-			*********************************************************** --> 
-			<DIV ID='SECTION-TITLE-CONTAINER'>
-				<IMG ALT="" ID='SECTION-IMG' SRC='{% block section-img %}{% endblock %}'>
-				<DIV ID='SECTION-TITLE'>
-					<b> {% block section-subtitle %} {% endblock %} </b>
-				</DIV>
-				<DIV CLASS='clear-both'></DIV>
-			</DIV>
-
-			<!-- *********************************************************
-			*
-			*	MAIN CONTENT
-			*
-			*********************************************************** --> 
-			<DIV ID='MAIN-CONTENT'> {% block main-screen-read   %}{% endblock %} </DIV>
-
-		</DIV>
-
-		<!-- CLEAR --> 
-		<div class="clear-both"></div>
+	<!-- *********************************************************
+	*
+	*	TOOLBAR.-
+	*
+	*********************************************************** --> 
+	<DIV ID='TOOLBAR'>
+		{% block toolbar %} {% endblock %} 
 	</DIV>
 
 	<!-- *********************************************************
 	*
-	* 	FOOTER.-
+	*	MAIN CONTENT DIV.-
 	*
 	*********************************************************** --> 
-	<DIV ID='FOOTER'>
-		{% block footer %}{% endblock %} 
+	<DIV ID='MAIN'> 
+		{% block main-screen-read   %}{% endblock %} 
+		<div class="clear-both"></div>
 	</DIV>
 
 {% endblock %}

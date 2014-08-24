@@ -10,7 +10,7 @@ import sys
 
 def render_error(request,message,data=None):
 	data['message'] = message
-	return render(render,"templates/error/exception.html",data)
+	return render(render,"templates/error.html",data)
 
 def render(request,template,data=None):
 	data['messages'] 	= messages.get_messages(request);

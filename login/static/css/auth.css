@@ -1,1 +1,5 @@
-
+body { background-image: url('/static/bg/login.jpg'); }
+#loginbox { width:30%; margin-left:15%; padding:5% 0%; opacity:0.8; }
+#ltitle-div { text-align:center; opacity:0.8; margin-bottom:5%; }
+#login_title { width:40%; }
+.input-group { margin: 1% 0%; }

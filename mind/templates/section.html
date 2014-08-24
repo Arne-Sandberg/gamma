@@ -1,7 +1,0 @@
-{% extends 'templates/main.html' %}
-{% block section-title %} 	The Book of Mind 									{% endblock %}
-{% block search %} 		{% include 'templates/tools/search.html' with autocomplete_url="/mind/cgi/search/" %} 	{% endblock %}
-{% block custom-js %}  		<SCRIPT  NAME='KAIN'   SRC='{{STATIC_URL}}js/mind.js'> </SCRIPT>           		{% endblock %}
-{% block custom-css %} 		<LINK    NAME='KAIN'   REL="stylesheet" HREF="{{STATIC_URL}}css/mind.css"     /> 	{% endblock %}
-{% block section-img %} 	{{STATIC_URL}}img/mpuzzle.png								{% endblock %}
-

@@ -3,24 +3,42 @@
 {% block custom-js %}  <SCRIPT NAME='LOGIN'   SRC='{{STATIC_URL}}js/auth.js'></SCRIPT>		 	{% endblock %}
 {% block custom-css %} <LINK   NAME='LOGIN'   REL="stylesheet" HREF="{{STATIC_URL}}css/auth.css" /> 	{% endblock %}
 {% block body %}
-	<DIV CLASS='HIDDEN' ID='loginbox'>	
-		<DIV ID='ltitle-div'><IMG ID='login_title' SRC='{{STATIC_URL}}img/phi-green.png'> </DIV>
+	<DIV ID='loginbox'>	
+		<DIV ID='ltitle-div'><IMG ID='login_title' SRC='{{STATIC_URL}}img/gamma.png'> </DIV>
 		<DIV ID='login_box'>	
-		        <h2 CLASS='errorlist' >{{message}}</h2>
+
+			<!-- ERROR MESSAGES --> 
+			{% if message %} 
+				<div class="alert alert-danger alert-dismissable" role="alert"> 
+					{{message}} 
+			                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+					<span class="sr-only">Cerrar</span></button>
+
+				</div> 
+			{% endif %} 
+
+			<!-- FORM --> 
 			<FORM METHOD='POST' ACTION='' >
 			{% csrf_token %}
 			
+				<!-- USERNAME --> 
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-					<INPUT TYPE='TEXT' class="form-control" NAME='username' value='' ID='usernamebox' PLACEHOLDER='Username' />	
+					<INPUT TYPE='TEXT' class="form-control" NAME='usuario' value='' ID='usernamebox' PLACEHOLDER='Username' />	
 				</div>
+			
+				<!-- PASSWORD --> 
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-eye-open"></span></span>
 					<INPUT TYPE='PASSWORD' NAME='password' class="form-control" value='' ID='passwordbox' PLACEHOLDER='Password' 	/>	
 				</div>
-				<BUTTON ID='LEFT-BUTTON' >Lo&phi;in!</BUTTON>
+
+				<!-- MAKE LOGIN --> 
+				<BUTTON class="btn btn-default btn-lg" >
+					<span class="glyphicon glyphicon-ok"> Entrar</span>
+				</BUTTON>
+
 			</FORM>
-			<A HREF='{% url 'register' %}'><BUTTON ID='RIGHT-BUTTON' >Re&phi;ister</BUTTON></A>
 		</DIV>
 	</DIV>
 {% endblock %}

@@ -1,56 +1,50 @@
-{% extends 'kain2/templates/section.html' %}
-{% block wtitle %} 		{{table.name}} {% endblock %}
+{% extends 'data/templates/section.html' %}
 
-{% block section-subtitle %} 	
-	<!-- TITLE --> 
-	<A HREF='{% url 'kain_home' %}'>Kain/</A>
-	<A HREF='{% url "kain_folder" table.id %}'>{{table.name}}</A> 
+{% block wtitle %}
+	{% if MYFOLDER.id %} {{MYFOLDER.name}} 
+	{% else %} Carpetas
+	{% endif %} 
 {% endblock %}
 
-{% block main-screen-tools %}
-	<!-- TOOLS --> 
-        <li><A HREF='{% url 'kain_edit' table.id %}' 				><span class="glyphicon glyphicon-cog"> Edit</span></a></li>
-        <li><A ONCLICK='confirmlink("{% url 'kain_delete' table.id %}");' 	><span class="glyphicon glyphicon-remove"> Remove</span></a></li>
+{% block toolbar %}
+
+        <!-- SECRET META DATA -->
+        <INPUT ID='F1ID'     VALUE='{{MYFOLDER.father.id|default:0}}'   TYPE='HIDDEN' />
+        <INPUT ID='FOLDERID' VALUE='{{MYFOLDER.id}}'                    TYPE='HIDDEN' />
+        <INPUT ID='F2ID'     VALUE='{{MYFILE.father.id|default:0}}'     TYPE='HIDDEN' />
+        <INPUT ID='FILEID'   VALUE='{{MYFILE.id}}'                      TYPE='HIDDEN' />
+
+        <!-- TABLE -->
+        <div class="row">
+        <div class="col-md-8"> {% include 'data/templates/path.html' %} </div>
+        <div class="col-md-4"> {% include 'data/templates/toolbar.html' %} </div>
+        </div>
+
 {% endblock %}
+
 {% block main-screen-read %}
+<DIV ID='FOLDER-CONTAINER'>
 
-	<!-- DISPLAY LIST --> 
-	<TABLE ID='FOLDER' CLASS='table table-striped' >
-	<THEAD>
-		<TR CLASS='TABLEUNDERLINE'>
-			<TD>Name</TD>
-			<TD>URL</TD>
-			<TD>User</TD>
-			<TD>Pass</TD>
-			<TD>Tools</TD>
-		</TR>
-	</THEAD>
-	<TBODY>
-	</TBODY>
-	</TABLE>
+	<!-- SERVING FILES --> 
+	<input id='fileinput' type="file" multiple>
+	<script>
+	//	$('#fileinput').trigger('click');   
+	</script>
 
-	<!-- INPUT: ADD BOOKMARK --> 
+	<!-- FOLDERS --> 
 	<div class="row">
-		<div class="col-lg-6">
-			<div class="input-group input-group-lg">
-				<span class="input-group-addon">
-				 	<span class="glyphicon glyphicon-plus"></span> 
-				</span>
-				<INPUT class="form-control" ID='ADD-BK' ONCHANGE='addB({{table.id}});'/> 
-			</div><!-- /input-group -->
-		</div><!-- /.col-lg-6 -->
-		<div class="col-lg-6">
-		</div><!-- /.col-lg-6 -->
-	</div><!-- /.row -->
-
-	<!-- JAVASCRIPT --> 
-	<SCRIPT>
-		{% for g in pageobj %} 
-			skelBookmark('{{g.id}}','{{g.name|default:""}}','{{g.user|default:""}}','{{g.password}}','{{g.url|default:""}}');
+		{% for f in pageobj %} 
+  		<div class="col-xs-10 col-md-2">
+    			<a href="{% url 'data_folder' f.id %}" class="thumb_folder thumbnail">
+      				<img src="/static/img/folder.png" alt="...">
+				<p>{{f.name|truncatechars:20}}</p>
+    			</a>
+  		</div>
 		{% endfor %} 
-	</SCRIPT>
+	</div>	
 
 	<!-- PAGER --> 
-	{% include 'templates/tools/paginator.html' %}
+	{% include 'templates/paginator.html' %}
 
+</DIV>
 {% endblock %}

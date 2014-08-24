@@ -1,0 +1,23 @@
+{% extends 'data/templates/section.html' %}
+{% block main-screen-read %}
+
+	<!-- DISPLAY LIST --> 
+	<DIV ID='ROOT-CONTAINER'>
+
+		<!-- DATABASE FOLDERS --> 
+		<DIV class='clear-both'></DIV>
+		{% for k in pageobj %} 
+			<A HREF='{% url 'kain_folder' k.id %}'>
+			<DIV CLASS='ROOT-FOLDER'>
+				<h2>{{k}}</h2>
+				<img src='{{STATIC_URL}}img/nstar.png' />
+			</DIV>
+			</A>
+		{% endfor %} 
+		<DIV class='clear-both'></DIV>
+	</DIV>
+
+	<!-- PAGER --> 
+	{% include 'templates/tools/paginator.html' %}
+
+{% endblock %}

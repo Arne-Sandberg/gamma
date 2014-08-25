@@ -68,7 +68,7 @@ def login(request):
 				if request.GET.get('next', False):
 					return HttpResponseRedirect(request.GET.get('next'))
 				else:
-					return HttpResponseRedirect("/folder/root/")
+					return HttpResponseRedirect("/folder/")
 
 	# Go to login page.-
 	return render(request,"login/templates/login.html", locals())

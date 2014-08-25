@@ -1,0 +1,48 @@
+{% extends 'gallery/templates/section.html' %}
+{% block wtitle %} {{MYFILE.name}} {% endblock %}
+
+{% block main-screen-read %}
+
+        <!-- SECRET META DATA -->
+	<div id='METADATA'>
+        	<INPUT ID='FOLDERID'    VALUE='' TYPE='HIDDEN' />
+        	<INPUT ID='FILEID' 	VALUE='' TYPE='HIDDEN' />
+        	<INPUT ID='FILENAME' 	VALUE='' TYPE='HIDDEN' />
+        	<INPUT ID='PLAYINDEX' 	VALUE='' TYPE='HIDDEN' />
+        	<INPUT ID='PLAYLIST' 	VALUE='' TYPE='HIDDEN' />
+	</div>	
+	
+	<!-- MEDIA --> 
+	<div id='MEDIA_CONTAINER'>
+		<IMG class='media_display' ID='MEDIA_IMAGE' />
+	</div>
+
+	<!-- DYNAMICALLY LOAD VALUES --> 
+	<SCRIPT>
+
+		/* LOAD METADATA ON WINDOW LOAD */
+		$(window).load(function() {
+
+			/* LOAD METADATA */
+			progress('10%');
+			updateMetadata('{{MYFILE.id}}','{{MYFILE.name}}','{{MYFILE.folder.id}}','{{playlist_index}}','{{hierarchy}}');
+
+			/* LOAD PATH */
+			progress('20%');
+			clearPath();
+			{% for c in MYFILE.array_path reversed %}
+				addPath('{{c.0}}','{{c.1}}');
+			{% endfor %} 
+			addFilePath('{{MYFILE.id}}','{{MYFILE.name}}');
+
+			/* LOAD MEDIA */
+			progress('60%');
+			loadImage("{{MYFILE.file.name}}");
+			progress('100%');
+
+			/* FINISH */
+			progress('0%');
+		});
+	</SCRIPT>
+
+{% endblock %}

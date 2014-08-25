@@ -18,7 +18,28 @@
 	*	TOP NAV
 	*
 	*********************************************************** --> 
-	{% include 'templates/nav.html' %} 
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+
+		<!-- LEFT NAV -->
+		<ul class="nav navbar-nav navbar-left">
+			<LI><A HREF='{% url 'folder_home' %}'><span class="glyphicon glyphicon-home"> Gamma</span></A></LI>
+		</ul>
+
+		<!-- RIGHT NAV --> 
+		<ul class="nav navbar-nav navbar-right">
+
+			<!-- SEARCH --> 
+			{% include 'templates/search.html' %} 
+
+			<!-- USER AND LOGOUT -->
+			<LI><A {% if request.user.is_superuser %}HREF='/admin/'{% endif %}> 
+					<span class="glyphicon glyphicon-user"></span> {{request.user.username}} </A></LI>
+			<LI><A HREF='{% url 'logout' %}'><span class="glyphicon glyphicon-log-out"> Salir</span></A></LI>
+		</ul>
+
+	</div><!-- /.container-fluid -->
+	</nav>
 
 	<!-- *********************************************************
 	*
@@ -53,8 +74,22 @@
 	*	TOOLBAR.-
 	*
 	*********************************************************** --> 
-	<DIV ID='TOOLBAR'>
-		{% block toolbar %} {% endblock %} 
+	<DIV ID='TOOLBAR' class="row">
+
+		<!-- PATH --> 
+		<div class="col-md-8"> 
+			<ul class="breadcrumb">
+				<li><A HREF='/folder/'><span class="glyphicon glyphicon-th-large"></span> </A></li>
+				{% block pathbar %}{% endblock %} 
+			</ul>
+		</div>
+
+		<!-- TOOLBAR --> 
+		<div class="col-md-4"> 
+			{% block toolbar %} {% endblock %} 
+		</div>
+
+	<!-- END OF TOOLBAR --> 
 	</DIV>
 
 	<!-- *********************************************************
@@ -63,7 +98,7 @@
 	*
 	*********************************************************** --> 
 	<DIV ID='MAIN'> 
-		{% block main-screen-read   %}{% endblock %} 
+		{% block main-screen-read %}{% endblock %} 
 		<div class="clear-both"></div>
 	</DIV>
 

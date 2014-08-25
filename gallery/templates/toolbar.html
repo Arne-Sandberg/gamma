@@ -1,0 +1,64 @@
+
+
+<!-- PREVIOUS --> 
+<A HREF="#" onClick='previousMedia();'>
+<button type="button" class="btn btn-lg btn-default">
+	<span class="glyphicon glyphicon glyphicon-backward"></span>
+</button>
+</A>
+
+<!-- LOOP --> 
+<A HREF="#" onClick='playLoop();'>
+<button type="button" class="btn btn-lg btn-default">
+	<span class="glyphicon glyphicon glyphicon-play"></span>
+</button>
+</A>
+
+<!-- NEXT --> 
+<A HREF="#" onClick='nextMedia();'>
+<button type="button" class="btn btn-lg btn-default">
+	<span class="glyphicon glyphicon glyphicon-forward"></span>
+</button>
+</A>
+
+<!-- RANDOM --> 
+<A HREF="#" onClick='playRandom();'>
+<button type="button" class="btn btn-lg btn-default">
+	<span class="glyphicon glyphicon glyphicon-question-sign"></span>
+</button>
+</A>
+
+<!-- DOWNLOAD --> 
+<a href="{{MEDIA_ROOT}}/{{MYFILE.file.name}}" download="{{MYFILE.name}}">
+<button type="button" class="btn btn-lg btn-default">
+	<span class="glyphicon glyphicon glyphicon-save"></span>
+</button>
+</A>
+
+<!-- FULLSCRENN -->
+<A HREF='#' onclick="toggleFullScreen(document.body)" >
+ <button type="button" class="btn btn-lg btn-default">
+	<span class="glyphicon glyphicon glyphicon-fullscreen"></span>
+</button>
+</A>
+
+
+<!-- SUPERUSER TOOLS --> 
+{% if request.user.is_superuser %} 
+
+	<!-- MOD --> 
+	<A HREF="#" onClick='editFile();'>
+	<button type="button" class="btn btn-lg btn-default">
+		<span class="glyphicon glyphicon-cog"></span>
+	</button>
+	</A>
+
+	<!-- REMOVE --> 
+	<A HREF="#" onClick='removeFile();'>
+	<button type="button" class="btn btn-lg btn-danger">
+		<span class="glyphicon glyphicon-remove"></span>
+	</button>
+	</A>
+
+<!-- END OF SUPERUSER TOOLS --> 
+{% endif %}

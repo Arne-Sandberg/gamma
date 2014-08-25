@@ -13,7 +13,8 @@ def render_error(request,message,data=None):
 	return render(render,"templates/error.html",data)
 
 def render(request,template,data=None):
-	data['messages'] 	= messages.get_messages(request);
+	data['messages'] = messages.get_messages(request);
+	data['TASK_UPLOAD_FILE_MAX_SIZE'] = settings.TASK_UPLOAD_FILE_MAX_SIZE
 	return render_to_response(
 				template, 
 				data,

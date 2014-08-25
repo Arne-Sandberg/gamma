@@ -1,0 +1,5 @@
+
+/* CREATE CSS DEPENDING ON MEDIA TYPE */
+#MEDIA_CONTAINER { text-align:center; max-height:40em; }
+.media_display { display:none; }
+#MEDIA_IMAGE {}

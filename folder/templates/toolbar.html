@@ -1,0 +1,81 @@
+
+<!-- UPLOAD --> 
+{% if MYFOLDER.id %} 
+	<!-- UPLOAD FILE: ONLY IF SUPERUSER OR CAN WRITE TO FOLDER -->
+	{% if request.user.is_superuser or MYFOLDER.write %} 
+		<A HREF="#" onClick='upload();'>
+		<button type="button" class="btn btn-lg btn-default">
+			<span class="glyphicon glyphicon glyphicon-open"></span>
+		</button>
+		</A>
+	{% endif %} 
+{% endif %} 
+
+<!-- PLAYLIST --> 
+{% if MYFOLDER.id %} 
+	<A HREF="/gallery/playlist/{{MYFOLDER.id}}/">
+	<button type="button" class="btn btn-lg btn-default">
+		<span class="glyphicon glyphicon glyphicon-film"></span>
+	</button>
+	</A>
+{% endif %} 
+
+<!-- SUPERUSER TOOLS --> 
+{% if request.user.is_superuser %} 
+
+	<!-- ADD --> 
+	<A HREF="#" onClick='addFolder();'>
+	<button type="button" class="btn btn-lg btn-default">
+		<span class="glyphicon glyphicon-plus"></span>
+	</button>
+	</A>
+
+	<!-- FOLDER TOOLS  --> 
+	{% if MYFOLDER.id %} 
+
+		<!-- DOWNLOAD ZIP --> 
+		<A HREF="#" onClick='zipFolder();'>
+		<button type="button" class="btn btn-lg btn-default">
+			<span class="glyphicon glyphicon glyphicon-save"></span>
+		</button>
+		</A>
+
+		<!-- MOD --> 
+		<A HREF="#" onClick='editFolder();'>
+		<button type="button" class="btn btn-lg btn-default">
+			<span class="glyphicon glyphicon-cog"></span>
+		</button>
+		</A>
+
+		<!-- READ --> 
+		<A HREF="#" onClick='readFolder();'>
+		<button type="button" class="btn btn-lg btn-default">
+			<span class="glyphicon glyphicon 
+				{% if MYFOLDER.read %} glyphicon-eye-open
+				{% else %} glyphicon-ban-circle {% endif %} 
+			"></span>
+		</button>
+		</A>
+
+		<!-- WRITE --> 
+		<A HREF="#" onClick='writeFolder();'>
+		<button type="button" class="btn btn-lg btn-default">
+			<span class="glyphicon glyphicon 
+				{% if MYFOLDER.write %} glyphicon-pencil
+				{% else %} glyphicon-ban-circle {% endif %} 
+			"></span>
+		</button>
+		</A>
+
+		<!-- REMOVE --> 
+		<A HREF="#" onClick='removeFolder();'>
+		<button type="button" class="btn btn-lg btn-danger">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+		</A>
+
+	<!-- END OF FOLDER TOOLS --> 
+	{% endif %} 
+
+<!-- END OF SUPER USER TOOLS --> 
+{% endif %} 

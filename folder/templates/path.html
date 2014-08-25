@@ -1,0 +1,9 @@
+<!-- FOLDER PATH --> 
+{% for f in MYFOLDER.array_path reversed %}
+	<li><a href="{% url 'folder_folder' f.id %}">{{f.name}}</a></li>
+{% endfor %} 
+
+<!-- FOLDER --> 
+{% if MYFOLDER %} 
+	<li class="active"><a href="{% url 'folder_folder' MYFOLDER.id %}">{{MYFOLDER.name}}</a></li>
+{% endif %} 

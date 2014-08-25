@@ -1,0 +1,4 @@
+{% extends 'templates/main.html' %}
+{% block custom-css %}  <LINK    REL="stylesheet" HREF="{{STATIC_URL}}css/file.css" /> {% endblock %}
+{% block custom-js %}   <SCRIPT  SRC='{{STATIC_URL}}js/file.js'> </SCRIPT> {% endblock %}
+{% block toolbar %} {% include 'gallery/templates/toolbar.html' %} {% endblock %}

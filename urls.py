@@ -5,7 +5,8 @@ from django.views.generic import TemplateView
 admin.autodiscover()
 
 urlpatterns = patterns('',
-		url(r'^data/', 		include("data.urls"),					),
+		url(r'^folder/', 	include("folder.urls"),					),
+		url(r'^gallery/',	include("gallery.urls"),				),
 		url(r'^login/', 	include("login.urls"),					),
 		url(r'^admin/', 	include(admin.site.urls),				),	
     		url(r'^.*', 		'views.home',			name='home',		),

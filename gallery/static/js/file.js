@@ -60,7 +60,8 @@ function playme(elem) {
 
 	/* DISPLAY ACCORDINT TO TYPE */
 	if (elem.ftype == 'IMG' ) 	displayImage(elem.fname);
-	else if (elem.ftype == 'PDF' ) 	displayPDF(elem.fname);
+	else if (elem.ftype == 'PDF' ) 	displayFrame(elem.fname);
+	else if (elem.ftype == 'TXT' ) 	displayFrame(elem.fname);
 	else 				displayFile();
 
 	/* CHANGE WINDOW NAME */
@@ -80,19 +81,22 @@ function playme(elem) {
  * 
  * *************************************************** */
 function displayImage(src) {
-	$('.media_display').hide();
+	clearDisplays();
 	$('#MEDIA_IMAGE').attr('src','/media/'+src);
 	$('#MEDIA_IMAGE').show();
 }
 function displayFile() {
-	$('.media_display').hide();
-	$('#MEDIA_IMAGE').attr('src','');
+	clearDisplays();
 }
-function displayPDF(src) {
+function displayFrame(src) {
+	clearDisplays();
+	$('#MEDIA_FRAME').attr('src','/media/'+src);
+	$('#MEDIA_FRAME').show();
+}
+function clearDisplays() {
 	$('.media_display').hide();
-	$('#MEDIA_PDF').attr('src','/media/'+src);
-	$('#MEDIA_PDF').show();
 	$('#MEDIA_IMAGE').attr('src','');
+	$('#MEDIA_FRAME').attr('src','');
 }
 
 /* ***************************************************

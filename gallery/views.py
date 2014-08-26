@@ -124,7 +124,7 @@ def fetch(request):
 			for i in range(0,settings.PLAYLIST_FETCH_CACHE):
 				if q<1:
 					q = playlist.count()-1
-				list2['cachePrevious'].append(playlist[q].serialize())
+				list2['cachePrevious'].insert(0,playlist[q].serialize())
 				q -= 1
 
 		# END 

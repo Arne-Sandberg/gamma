@@ -229,7 +229,7 @@ class GFile(Factory):
 		#CHECK FILE TYPE.-
 		if self.extension() in ['.mid','.mp3']:
 			self.type = 'AUD'
-		elif self.extension() in ['.jpg','.png','.jpeg']:
+		elif self.extension() in ['.jpg','.png','.jpeg','.gif']:
 			self.type = 'IMG'
 		elif self.extension() in ['.mp4','.mpeg','.3gp']:
 			self.type = 'VID'

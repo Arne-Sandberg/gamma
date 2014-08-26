@@ -3,4 +3,13 @@
 #MEDIA_CONTAINER { text-align:center; max-height:40em; }
 .media_display { }
 #MEDIA_IMAGE {}
-#MEDIA_PDF { width:100%; height: 40em; }
+#MEDIA_FRAME { width:100%; height: 40em; }
+
+/* NEXT AND PREVIOUS ARROWS */
+.myArrow { 
+	position:absolute; z-index:1000; background:rgba(255,255,255,0.7); opacity:0.8;
+	font-size:3em; cursor:pointer; padding:1%; border-radius:5px;
+}
+.myArrow:hover { opacity:1.0; }
+#leftArrow { left:1%; top:50%; }
+#rightArrow { right:1%; top:50%; }

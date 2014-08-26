@@ -295,7 +295,7 @@ def compress(request):
 		src  = "tmp/%d.zip" % ts1
 		name = "%s/%s" % (settings.MEDIA_ROOT,src)
 		os.system("rm -rf %s/tmp/*" % settings.MEDIA_ROOT)
-		os.system("cd %s; zip -r %s -P '%d' %s " % (settings.MEDIA_ROOT,name,ts2,folder.short_path()))
+		os.system("cd %s/%s; zip -r %s -P '%d' * " % (settings.MEDIA_ROOT,folder.short_path(),name,ts2))
 		list2['src'] = src
 		list2['pass'] = ts2
 

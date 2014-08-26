@@ -3,12 +3,21 @@
 
 {% block main-screen-read %}
 
+	<!-- ARRAYS --> 
+	<div id='leftArrow' class='myArrow' onClick='playPrevious();'>
+		<span class="glyphicon glyphicon glyphicon-chevron-left"></span>
+	</div>
+	<div id='rightArrow' class='myArrow' onClick='playNext();'>
+		<span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+	</div>
+
+
 	<!-- MEDIA --> 
 	<div id='MEDIA_CONTAINER' class='row'>
 		<div class="col-xs-6 col-md-12">	
 			<IMG class='img-thumbnail media_display' ID='MEDIA_IMAGE' SRC='' />
 			<a class='media_display downloadLink' ID='MEDIA_FILE' href="" download="" ></a>
-			<iframe class='media_display' ID='MEDIA_PDF' src=""></iframe> 	
+			<iframe class='media_display' ID='MEDIA_FRAME' src=""></iframe> 	
 		</div>
 	</div>
 

@@ -69,7 +69,7 @@ function playme(elem) {
 	history.pushState(null, null, myurl)
 
 	/* HIDE CURRENT MEDIA */
-	var animSpeed = 100; 
+	var animSpeed = 200; 
 	$('.media_display').fadeOut(animSpeed,function() {
 		if ($(".media_display:animated").length === 0) {
 
@@ -120,15 +120,19 @@ function clearDisplays(callback) {
  * *************************************************** */
 function playNext() { 
 	
-	// Check queue size.-
-	if (window.QUEUE_NEXT.length<2) 
-		return;
+	// PLAY LOOP? 
+	if (!isLoop()) {
 
-	// Add current to the top of the previous cache.-
-	window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
+		// Check queue size.-
+		if (window.QUEUE_NEXT.length<2) 
+			return;
 
-	// Get first element of the next cache.-
-	window.NOW_PLAYING = window.QUEUE_NEXT.shift();
+		// Add current to the top of the previous cache.-
+		window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
+
+		// Get first element of the next cache.-
+		window.NOW_PLAYING = window.QUEUE_NEXT.shift();
+	}
 
 	// Move cursor up.-
 	setCursorUp();
@@ -141,15 +145,20 @@ function playNext() {
 }
 function playPrevious() {
 	
-	// Check queue size.-
-	if (window.QUEUE_PREVIOUS.length<2) 
-		return;
+	// PLAY LOOP? 
+	if (!isLoop()) {
 
-	// Add current to the beginning of the next cache.-
-	window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
+		// Check queue size.-
+		if (window.QUEUE_PREVIOUS.length<2) 
+			return;
 
-	// Get last element of the previous cache.-
-	window.NOW_PLAYING = window.QUEUE_PREVIOUS.pop();
+		// Add current to the beginning of the next cache.-
+		window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
+
+		// Get last element of the previous cache.-
+		window.NOW_PLAYING = window.QUEUE_PREVIOUS.pop();
+
+	}
 
 	// Move cursor down.-
 	setCursorDown();

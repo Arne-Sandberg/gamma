@@ -101,8 +101,14 @@ def fetch(request):
 	isRandom = (int)(request.GET.get('random')  or 0)
 	if isRandom:
 		for i in range(0,settings.PLAYLIST_FETCH_CACHE):
-			q = random.randint(0,playlist.count())
-			list2['cacheNext'].append(playlist[q].serialize())
+			q = random.randint(0,playlist.count()-1)
+			if q != MYCURSOR:
+				list2['cacheNext'].append(playlist[q].serialize())
+		for i in range(0,settings.PLAYLIST_FETCH_CACHE):
+			q = random.randint(0,playlist.count()-1)
+			list2['cachePrevious'].append(playlist[q].serialize())
+			if q != MYCURSOR:
+				list2['cacheNext'].append(playlist[q].serialize())
 
 	# IF NOT RANDOM.-
 	else:
@@ -127,8 +133,8 @@ def fetch(request):
 				list2['cachePrevious'].insert(0,playlist[q].serialize())
 				q -= 1
 
-		# END 
-		return render_json(request,list2)
+	# END 
+	return render_json(request,list2)
 
 # -------------------------------------------------------------------
 # VIEW GALLERY

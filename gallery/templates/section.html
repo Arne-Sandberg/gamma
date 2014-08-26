@@ -2,16 +2,10 @@
 {% block custom-css %}  <LINK    REL="stylesheet" HREF="{{STATIC_URL}}css/file.css" /> {% endblock %}
 {% block toolbar %} {% include 'gallery/templates/toolbar.html' %} {% endblock %}
 {% block custom-js %}   
-	<script src="/static/olplayer/build/mediaelement-and-player.min.js"></script>
-	<script src="testforfiles.js"></script>	
-	<link rel="stylesheet" href="/static/olplayer/build/mediaelementplayer.min.css" />
 	<SCRIPT>
 		var QUEUE_NEXT = new Array;
 		var QUEUE_PREVIOUS = new Array;
 		var NOW_PLAYING;
-		$(document).ready(function() {
-    			$('body').oiplayer();   // on all video and audio tags in body
-			});
 	</SCRIPT>
 	<SCRIPT  SRC='{{STATIC_URL}}js/file.js'> </SCRIPT> 
 	<SCRIPT  SRC='{{STATIC_URL}}js/meta.js'> </SCRIPT> 

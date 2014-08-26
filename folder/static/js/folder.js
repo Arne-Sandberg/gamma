@@ -209,14 +209,9 @@ function writeFolder(){
 
 /* UPLOAD FILES */
 function upload(){
-
-
-	/* GET FILES */
 	var input = $('#fileinput');
 	input.replaceWith(input.val('').clone(true));
 	input.trigger('click');
-
-	return;
 }
 
 /* UPLOAD MULTIPLER FILES LISTENER */
@@ -231,7 +226,6 @@ function fileListener(input) {
 	var max_size = $("#TASK_UPLOAD_FILE_MAX_SIZE").val();
 
 	/* VALIDATE FILES */
-	progress('2%');
 	for (var i=0; i<window.uploadSize; i++) {
 		if (files[i].size > max_size) {
 			alert("ERROR " + files[i].name + " es demasiado grande " + files[i].size);

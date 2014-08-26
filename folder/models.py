@@ -7,6 +7,7 @@ from django.db.models import Sum, Avg
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from Crypto.Cipher import Blowfish
+import random
 import os
 import binascii
 import shutil
@@ -152,7 +153,8 @@ def get_upload_path(instance, filename):
         name, extension = os.path.splitext(filename)
 	path = instance.folder.short_path()
 	ts   = time.time()
-	return "%s%d%s" % (path,ts,extension)
+	rand = random.randint(10000000000,999999999999999)
+	return "%s%d_%d%s" % (path,ts,rand,extension)
 
 # -----------------------------------------------------------------------------------------------
 # FACTORY/ FILE/

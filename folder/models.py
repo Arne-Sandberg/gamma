@@ -121,7 +121,7 @@ class Folder(Factory):
 		while ob.father and ob.father.id:
 			ar.append(ob.father)	
 			ob = ob.father
-		return ar
+		return reversed(ar)
 
 	# SET READ RECURSIVELY
 	def setRead(self,boolean):
@@ -265,6 +265,8 @@ class GFile(Factory):
                 	"ftype":        self.type,
                		"path":         [],
         	}
+		for p in self.folder.array_path():
+			d['path'].append([ p.id, p.name ])
 		return d 
 	
 

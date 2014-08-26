@@ -1,48 +1,39 @@
 {% extends 'gallery/templates/section.html' %}
-{% block wtitle %} {{MYFILE.name}} {% endblock %}
+{% block wtitle %} {% endblock %}
 
 {% block main-screen-read %}
 
-        <!-- SECRET META DATA -->
-	<div id='METADATA'>
-        	<INPUT ID='FOLDERID'    VALUE='' TYPE='HIDDEN' />
-        	<INPUT ID='FILEID' 	VALUE='' TYPE='HIDDEN' />
-        	<INPUT ID='FILENAME' 	VALUE='' TYPE='HIDDEN' />
-        	<INPUT ID='PLAYINDEX' 	VALUE='' TYPE='HIDDEN' />
-        	<INPUT ID='PLAYLIST' 	VALUE='' TYPE='HIDDEN' />
-	</div>	
-	
 	<!-- MEDIA --> 
-	<div id='MEDIA_CONTAINER'>
-		<IMG class='media_display' ID='MEDIA_IMAGE' />
+	<div id='MEDIA_CONTAINER' class='row'>
+		<div class="col-xs-6 col-md-12">	
+			<IMG class='img-thumbnail media_display' ID='MEDIA_IMAGE' SRC='' />
+			<a class='media_display downloadLink' ID='MEDIA_FILE' href="" download="" ></a>
+			<iframe class='media_display' ID='MEDIA_PDF' src=""></iframe> 	
+		</div>
 	</div>
 
 	<!-- DYNAMICALLY LOAD VALUES --> 
 	<SCRIPT>
 
-		/* LOAD METADATA ON WINDOW LOAD */
+		/* LOAD CURRENT OBJECT */
 		$(window).load(function() {
-
-			/* LOAD METADATA */
-			progress('10%');
-			updateMetadata('{{MYFILE.id}}','{{MYFILE.name}}','{{MYFILE.folder.id}}','{{playlist_index}}','{{hierarchy}}');
-
-			/* LOAD PATH */
-			progress('20%');
-			clearPath();
-			{% for c in MYFILE.array_path reversed %}
-				addPath('{{c.0}}','{{c.1}}');
-			{% endfor %} 
-			addFilePath('{{MYFILE.id}}','{{MYFILE.name}}');
-
-			/* LOAD MEDIA */
-			progress('60%');
-			loadImage("{{MYFILE.file.name}}");
-			progress('100%');
-
-			/* FINISH */
+			setStop();
+			progress('50%');
+			fetchOne({{fid}},{{playlistID|default:0}},fetch);
 			progress('0%');
 		});
+
+		/* SET KEY MOVEMENT */
+		$('body').keydown(function(e) {
+                        //alert(e.keyCode);
+                        if(e.keyCode == 39) {
+				playNext();
+                        }
+                        if(e.keyCode == 37) {
+				playPrevious();
+                        }
+                });
+
 	</SCRIPT>
 
 {% endblock %}

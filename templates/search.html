@@ -34,7 +34,7 @@
 
 	// Auto complete
 	$("#sinput").catcomplete({
-			source: '{{autocomplete_url}}',
+			source: '/search/',
 			select: function(event, ui) { location.href=ui.item.value; },
 	});
 

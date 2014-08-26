@@ -1,35 +1,31 @@
 
 
 <!-- PREVIOUS --> 
-<A HREF="#" onClick='previousMedia();'>
+<A HREF="#" onClick='playPrevious();'>
 <button type="button" class="btn btn-lg btn-default">
 	<span class="glyphicon glyphicon glyphicon-backward"></span>
 </button>
 </A>
 
 <!-- LOOP --> 
-<A HREF="#" onClick='playLoop();'>
-<button type="button" class="btn btn-lg btn-default">
-	<span class="glyphicon glyphicon glyphicon-play"></span>
+<A HREF="#" onClick='playBtn();'>
+<button type="button" id='playBtn' class="btn btn-lg btn-default">
+	<span id='gstop' class="glyphicon glyphicon-stop"></span>
+	<span id='gplay' class="glyphicon glyphicon-play"></span>
+	<span id='grand' class="glyphicon glyphicon-random"></span>
+	<span id='gloop' class="glyphicon glyphicon-repeat"></span>
 </button>
 </A>
 
 <!-- NEXT --> 
-<A HREF="#" onClick='nextMedia();'>
+<A HREF="#" onClick='playNext();'>
 <button type="button" class="btn btn-lg btn-default">
 	<span class="glyphicon glyphicon glyphicon-forward"></span>
 </button>
 </A>
 
-<!-- RANDOM --> 
-<A HREF="#" onClick='playRandom();'>
-<button type="button" class="btn btn-lg btn-default">
-	<span class="glyphicon glyphicon glyphicon-question-sign"></span>
-</button>
-</A>
-
 <!-- DOWNLOAD --> 
-<a href="{{MEDIA_ROOT}}/{{MYFILE.file.name}}" download="{{MYFILE.name}}">
+<a class='downloadLink' href="" download="" >
 <button type="button" class="btn btn-lg btn-default">
 	<span class="glyphicon glyphicon glyphicon-save"></span>
 </button>

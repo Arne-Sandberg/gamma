@@ -4,7 +4,7 @@
 	<!-- UPLOAD FILE: ONLY IF SUPERUSER OR CAN WRITE TO FOLDER -->
 	{% if request.user.is_superuser or MYFOLDER.write %} 
 		<A HREF="#" onClick='upload();'>
-		<button type="button" class="btn btn-lg btn-default">
+		<button type="button" class="btn btn-lg btn-info">
 			<span class="glyphicon glyphicon glyphicon-open"></span>
 		</button>
 		</A>

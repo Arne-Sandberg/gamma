@@ -1,5 +1,6 @@
 
 /* CREATE CSS DEPENDING ON MEDIA TYPE */
 #MEDIA_CONTAINER { text-align:center; max-height:40em; }
-.media_display { display:none; }
+.media_display { }
 #MEDIA_IMAGE {}
+#MEDIA_PDF { width:100%; height: 40em; }

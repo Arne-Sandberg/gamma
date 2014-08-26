@@ -256,7 +256,7 @@ def folder(request,fid=None):
 	if MYFOLDER:
 		qs 	= MYFOLDER.files()
 		page 	= request.GET.get('page') or 1
-		pageobj = Paginator(qs,15,orphans=5).page(page)
+		pageobj = Paginator(qs,30,orphans=5).page(page)
 		qs 	= None
 
 	# END 

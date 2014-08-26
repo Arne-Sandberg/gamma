@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 		url(r'^folder/', 	include("folder.urls"),					),
 		url(r'^gallery/',	include("gallery.urls"),				),
 		url(r'^login/', 	include("login.urls"),					),
+		url(r'^search/', 	include("search.urls"),					),
 		url(r'^admin/', 	include(admin.site.urls),				),	
     		url(r'^.*', 		'views.home',			name='home',		),
 )

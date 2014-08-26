@@ -11,6 +11,7 @@ from folder.models 			import *
 from datetime                           import datetime, timedelta
 from django                             import forms
 from libs.shared 			import * 
+import random
 import numpy
 import json
 import sys
@@ -44,93 +45,99 @@ def playlist(request,fid):
 		return HttpResponseRedirect("/folder/%d/" % MYFOLDER.id)
 
 	# REDIRECT TO FIRST ELEMENT OF PLAYLIST
-	url = "/gallery/%d/?playlist=%d" % (qs[0].id,MYFOLDER.id)
+	url = "/gallery/%d/?playlistID=%d" % (qs[0].id,MYFOLDER.id)
 	return HttpResponseRedirect(url)
 
 # -------------------------------------------------------------------
 # LOAD THE FOLLOWING ELEMENTS OF THE PLAYLIST
 # -------------------------------------------------------------------
 @login_required
-def fetch(request,playlistID,cursorID):
+def fetch(request):
 
 	# BEGIN
 	list2 = {}
+	MYFOLDER = None
+	MYFILE	 = None
+	MYCURSOR = None
 	list2['status'] = True
 	list2['message'] = ""
-	list2['cache'] = []
+	list2['cacheNext'] = []
+	list2['cachePrevious'] = []
+
+	# GET CURSOR POSITION.-
+	cursorID = (int)(request.GET.get('cursorID') or 0)
+	MYCURSOR = cursorID
 	
-	# GET PLAYLIST
-	if Folder.existsID(playlistID):
-		MYFOLDER = Folder.objects.get(id=playlistID)
+	# GET PLAYLIST.-
+	playlistID = (int)(request.GET.get('playlistID') or 0)
+	if playlistID: 
+		if Folder.existsID(playlistID):
+			MYFOLDER = Folder.objects.get(id=playlistID)
+		else:
+			list2['status'] = False
+			list2['message'] = "No existe la lista de reproduccion"
+			return render_json(request,list2)
 	else:
 		list2['status'] = False
-		list2['message'] = "No existe la lista de reproduccion"
+		list2['message'] = "Faltan parametros"
+		return render_json(request,list2)
 
 	# PERMISSIONS.
 	# IT MUST BE A SUPERUSER OR A PUBLIC FOLDER.-
 	if request.user.is_superuser:
 		pass
-	elif MYFILE and MYFILE.id and not MYFILE.folder.read:
+	elif MYFOLDER and MYFOLDER.id and not MYFOLDER.read:
 		list2['status'] = False
 		list2['message'] = "No se puede leer la lista de reproduccion"
+		return render_json(request,list2)
 
-	# FETCH LIST.-
-	if list2['status']:
-		qs = MYFOLDER.playlist(request.user)
-	
-		# GET NEXT LINEAR.-
-		i = 0	
-		q = 0
-		while i < settings.PLAYLIST_FETCH_CACHE:
+	# GET PLAYLIST 
+	playlist = MYFOLDER.playlist(request.user)
+	if playlist.count()<1:
+		list2['emptyList'] = True
+		return render_json(request,list2)
 
-			# SERIALIZE ELEMENT
-			list2['cache'].append(qs[q].serialize())
+	# IF RANDOM LIST.-
+	isRandom = (int)(request.GET.get('random')  or 0)
+	if isRandom:
+		for i in range(0,settings.PLAYLIST_FETCH_CACHE):
+			q = random.randint(0,playlist.count())
+			list2['cacheNext'].append(playlist[q].serialize())
 
-			# NEXT.-
-			i += 1	
-			q += 1
-			if q >= qs.count():
-				q = 0
-	
-	# END 
-	return render_json(request,list2)
+	# IF NOT RANDOM.-
+	else:
+
+		# GET NEXT.-
+		fetchNext = (int)(request.GET.get('fetchNext') or 0)
+		if fetchNext:
+			q = MYCURSOR + 1
+			for i in range(0,settings.PLAYLIST_FETCH_CACHE):
+				if q >= playlist.count():
+					q = 0
+				list2['cacheNext'].append(playlist[q].serialize())
+				q += 1
+
+		# GET PREVIOUS.-
+		fetchPrevious = (int)(request.GET.get('fetchPrevious') or 0)
+		if fetchPrevious:
+			q = MYCURSOR - 1
+			for i in range(0,settings.PLAYLIST_FETCH_CACHE):
+				if q<1:
+					q = playlist.count()-1
+				list2['cachePrevious'].append(playlist[q].serialize())
+				q -= 1
+
+		# END 
+		return render_json(request,list2)
 
 # -------------------------------------------------------------------
 # VIEW GALLERY
+# EVERYTHING IS HANDLED OVER JAVASCRIPT TOGETHER WITH 
+# OTHER VIEWS. THIS ONLY SERVES THE TEMPLATE.-
 # -------------------------------------------------------------------
 @login_required
 def gallery(request,fid):
-
-	# GET FILE.-
-	if GFile.existsID(fid):
-		MYFILE = GFile.objects.get(id=fid)
-	else:
-		messages.add_message(request, messages.ERROR, "No existe el archivo!")
-		return HttpResponseRedirect("/folder/")
-
-	# PERMISSIONS.
-	# IT MUST BE A SUPERUSER OR A PUBLIC FOLDER.-
-	if request.user.is_superuser:
-		pass
-	elif not MYFILE.folder.read:
-	       	messages.add_message(request, messages.ERROR, "Prohibido!")
-		return HttpResponseRedirect("/folder/")
-
-	# CHECK HIERARCHY OF THE PLAYLIST.-
-	hierarchy = request.GET.get('playlist') or None
-	if hierarchy:
-		playlist = Folder.objects.get(id=unicode(hierarchy))
-	else:
-		playlist = MYFILE.folder
-	qs = playlist.playlist(request.user)
-	i = 0
-	while i<qs.count() and qs[i]!=MYFILE:
-		i += 1
-	playlist_index=i	
-	playlist = None
-	qs = None
-
-	# END 
+	playlistID = request.GET.get('playlistId')
 	return render(request,"gallery/templates/gallery.html",locals())
 
 # -------------------------------------------------------------------
@@ -268,3 +275,63 @@ def add(request):
 
 	# END 
 	return render_json(request,list2)
+
+# -------------------------------------------------------------------
+# FETCH ONLY ONE.-
+# -------------------------------------------------------------------
+@login_required
+def get(request,fileID):
+
+	# BEGIN
+	list2 = {}
+	list2['status'] = True
+	list2['message'] = ""
+	list2['file'] = []
+
+	# GET FILE.-
+	if GFile.existsID(fileID):
+		MYFILE = GFile.objects.get(id=fileID)
+	else:
+		list2['status'] = False
+		list2['message'] = "No existe el archivo"
+		return render_json(request,list2)
+
+	# GET PLAYLIST OR FOLDER ID
+	playlistID = (int)(request.GET.get('playlistID') or 0)
+	if playlistID: 
+		list2['playlistID'] = playlistID
+		if Folder.existsID(playlistID):
+			MYFOLDER = Folder.objects.get(id=playlistID)
+		else:
+			list2['status'] = False
+			list2['message'] = "No existe la lista de reproduccion"
+			return render_json(request,list2)
+	else:
+		list2['playlistID'] = MYFILE.folder.id
+		MYFOLDER = MYFILE.folder
+
+	# PERMISSIONS.
+	# IT MUST BE A SUPERUSER OR A PUBLIC FOLDER.-
+	if request.user.is_superuser:
+		pass
+	elif MYFOLDER and MYFOLDER.id and not MYFOLDER.read:
+		list2['status'] = False
+		list2['message'] = "No se puede leer la lista de reproduccion"
+		return render_json(request,list2)
+
+	# GET PLAYLIST AND CURSOR
+	playlist = MYFOLDER.playlist(request.user)
+	list2['playlistID'] = MYFOLDER.id
+	list2['playlistCount'] = playlist.count()
+	i = 0
+	while i<playlist.count() and playlist[i]!= MYFILE:
+		i += 1
+	MYCURSOR = i
+	list2['cursorID'] = MYCURSOR
+
+	# RETURN FILE.-
+	list2['file'] = MYFILE.serialize()
+	list2['cache_size']  = settings.PLAYLIST_FETCH_CACHE
+	list2['cache_fetch'] = settings.PLAYLIST_NEXT_FETCH
+	return render_json(request,list2)
+

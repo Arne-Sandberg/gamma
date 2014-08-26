@@ -1,96 +1,9 @@
 
-/* EDIT A FILE NAME */
-function editFile(){
-
-        /* GET FOLDER NAME */
-        progress('20%');
-        var current = $("#FILENAME").val();
-        var name = prompt("Nuevo nombre?",current);
-        if (!name) {
-                progress('0%');
-                return;
-        }
-
-	/* GET FILE ID */
-        progress('40%');
-        var fid = $("#FILEID").val();
-
-        /* GENERATE DATA */
-        var data        = {};
-        data['fid']     = fid;
-        data['name']    = name;
-
-	/* MAKE REQUEST */
-        var url = "/gallery/mod/";
-        $.ajax({
-                type:           "GET",
-                data:           data,
-                dataType:       'json',
-                url:            url,
-                success:        function(data) {
-                                        if (data.status==0) {
-                                                progress('0%');
-                                                alert(data.message);
-                                        } else {
-                                                progress('100%');
-                                                location.reload();
-                                        }
-                                },
-                error:          function(e,msg) {
-                                        progress('0%');
-                                        alert("ERROR");
-                                        alert(msg);
-                }
-        });
-}
-
-/* REMOVE A FILE */
-function removeFile(){
-
-	/* CONFIRM */
-        progress('20%');
-	if (!confirm('Está seguro que desea borrar este archivo?')) {
-        	progress('0%');
-		return;
-	}
-
-	/* GET FILE ID */
-        progress('40%');
-        var fid = $("#FILEID").val();
-
-	/* GET FATHER ID */
-        progress('60%');
-        var next= $("#FOLDERID").val();
-
-        /* GENERATE DATA */
-        var data        = {};
-        data['fid']     = fid;
-
-	/* MAKE REQUEST */
-        var url = "/gallery/rem/";
-        $.ajax({
-                type:           "GET",
-                data:           data,
-                dataType:       'json',
-                url:            url,
-                success:        function(data) {
-                                        if (data.status==0) {
-                                                progress('0%');
-                                                alert(data.message);
-                                        } else {
-                                                progress('100%');
-						location.href='/folder/'+next+'/';
-                                        }
-                                },
-                error:          function(e,msg) {
-                                        progress('0%');
-                                        alert("ERROR");
-                                        alert(msg);
-                }
-        });
-}
-	
-/* TOGGLE FULLSCREEN */
+/* ***************************************************
+ * 
+ * 	TOGGLE FULLSCREEN
+ * 
+ * *************************************************** */
 function toggleFullScreen(elem) {
     if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
         if (elem.requestFullScreen) {
@@ -114,34 +27,118 @@ function toggleFullScreen(elem) {
         }
     }
 }
+
+/* ***************************************************
+ * 
+ * 	PLAY ONE FILE.-
+ * 
+ * *************************************************** */
+function playme(elem) {
 	
-/* UPDATE METADATA */	
-function updateMetadata(id,name,fid,fname,cid,lid) {
+	/* UPDATE QUEUE */
+	window.NOW_PLAYING = elem;
+	// alert(JSON.stringify(elem));
 
-	/* METADATA FIELDS */
-	$("#FILEID").val(id);
-	$("#FILENAME").val(name);
-	$("#FOLDERID").val(fid);
-	$("#PLAYINDEX").val(cid);
-	$("#PLAYLIST").val(lid);
+	/* Update metadata */
+	setFileID(elem.id);
+	setFileName(elem.name);
+	setFileType(elem.ftype);
+	setFolderID(elem.folder_id);
+	setFolderName(elem.folder_name);
 
+	/* Update path */
+	clearPath();
+	for (p in elem.path) 
+		addPath(elem.path[p][0], elem.path[p][1])
+	addPath(elem.folder_id,elem.folder_name);
+	addFilePath(elem.id,elem.name);
+
+	/* Update download path */
+	var dw = $('.downloadLink');
+	dw.attr('href','/media/'+elem.fname);
+	dw.attr('download',elem.name);
+
+	/* DISPLAY ACCORDINT TO TYPE */
+	if (elem.ftype == 'IMG' ) 	displayImage(elem.fname);
+	else if (elem.ftype == 'PDF' ) 	displayPDF(elem.fname);
+	else 				displayFile();
+
+	/* CHANGE WINDOW NAME */
+	document.title = elem.name;
+
+	/* CHANGE WINDOW LOCATION WITHOUT RELOAD */
+	var myurl = '/gallery/'+elem.id+'/';
+	history.pushState(null, null, myurl)
+
+	/* END */
+	// alert(JSON.stringify(elem));
 }
 
-/* CLEAR PATH */
-function clearPath() { $('#TOOLBAR .breadcrumb .dynamicPath').remove(); }
-
-/* ADD TO PATH */
-function addPath(fid,fname) { 
-	var html = '<li class="dynamicPath"><a href="/folder/'+fid+'/">'+fname+'</a></li>'	
-	$('#TOOLBAR .breadcrumb').append(html);
+/* ***************************************************
+ * 
+ * 	DISPLAY CONTENT.-
+ * 
+ * *************************************************** */
+function displayImage(src) {
+	$('.media_display').hide();
+	$('#MEDIA_IMAGE').attr('src','/media/'+src);
+	$('#MEDIA_IMAGE').show();
+}
+function displayFile() {
+	$('.media_display').hide();
+	$('#MEDIA_IMAGE').attr('src','');
+}
+function displayPDF(src) {
+	$('.media_display').hide();
+	$('#MEDIA_PDF').attr('src','/media/'+src);
+	$('#MEDIA_PDF').show();
+	$('#MEDIA_IMAGE').attr('src','');
 }
 
-/* ADD FILE TO PATH */
-function addFilePath(id,name) { 
-	var html = '<li class="dynamicPath active"><a href="/gallery/'+id+'/">'+name+'</a></li>'	
-	$('#TOOLBAR .breadcrumb').append(html);
-}
+/* ***************************************************
+ * 
+ * 	PLAY NEXT AND PREVIOUS 
+ * 
+ * *************************************************** */
+function playNext() { 
+	
+	// Check queue size.-
+	if (window.QUEUE_NEXT.length<2) 
+		return;
 
-/* LOAD IMAGE */
-function loadImage(src) { $("#MEDIA_IMAGE").show(); $("#MEDIA_IMAGE").attr('src','/media/'+src); }
-function loadText(src)  { $("#MEDIA_TEXT").show();  $("#MEDIA_TEXT").html(value); }
+	// Add current to the top of the previous cache.-
+	window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
+
+	// Get first element of the next cache.-
+	window.NOW_PLAYING = window.QUEUE_NEXT.shift();
+
+	// Move cursor up.-
+	setCursorUp();
+
+	// Automatic fetch for other elements.-
+	fetch();	
+
+	// Async fetch for other elements.-
+	playme(window.NOW_PLAYING);
+}
+function playPrevious() {
+	
+	// Check queue size.-
+	if (window.QUEUE_PREVIOUS.length<2) 
+		return;
+
+	// Add current to the beginning of the next cache.-
+	window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
+
+	// Get last element of the previous cache.-
+	window.NOW_PLAYING = window.QUEUE_PREVIOUS.pop();
+
+	// Move cursor down.-
+	setCursorDown();
+
+	// Play that element.-
+	playme(window.NOW_PLAYING);
+
+	// Async fetch for other elements.-
+	fetch();	
+}

@@ -105,6 +105,10 @@ function removeFile(){
  * *************************************************** */
 function fetch(){
 
+	/* CHECK LOCK */
+	if (fetchInProgress()) 
+		return false;
+
 	/* GENERATE URL */
 	var fetchNext = false;
 	var fetchPrev = false;
@@ -126,6 +130,7 @@ function fetch(){
 	// alert(url);
 
 	/* MAKE REQUEST */
+	setFetchLockOn();
         $.ajax({
                 type:           "GET",
                 dataType:       'json',
@@ -135,8 +140,8 @@ function fetch(){
                                                 alert(data.message);
                                         } else {
 						/* UPDATE QUEUES */
+						// alert(JSON.stringify(data.cacheNext));
 						// alert(JSON.stringify(data.cachePrevious));
-						// alert(JSON.stringify(data.cacheNext.length));
 						if ( data.cacheNext.length>1) {
 							buffer = new Array;
 							for (c in data.cacheNext) 	
@@ -149,6 +154,7 @@ function fetch(){
 								buffer.push(data.cachePrevious[c]);
 							window.QUEUE_PREVIOUS = buffer;
 						}
+						setFetchLockOff();
                                         }
                                 },
                 error:          function(e,msg) {
@@ -156,6 +162,11 @@ function fetch(){
                 }
         });
 }
+
+window.FLOCK = false;
+function setFetchLockOn() 	{ window.FLOCK = true; progress('5%'); } 
+function setFetchLockOff() 	{ window.FLOCK = false; progress('0%');  } 
+function fetchInProgress()	{ return window.FLOCK == true; }
 
 /* ***************************************************
  * 

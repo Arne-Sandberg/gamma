@@ -41,7 +41,7 @@
 
 	function setCursorUp () {
 		var c = getCursorID();
-		var t = getPlaylistCount();
+		var t = getPlaylistCount()-1;
 		if ( c == t ) 
 			c = 0;
 		else

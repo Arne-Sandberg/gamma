@@ -69,48 +69,19 @@ function playme(elem) {
 	history.pushState(null, null, myurl)
 
 	/* HIDE CURRENT MEDIA */
-	var animSpeed = 200; 
-	$('.media_display').fadeOut(animSpeed,function() {
-		if ($(".media_display:animated").length === 0) {
+	$('.media_display').css('display','none');
 
-			/* CLEAR MEDIA ELEMENTS */ 
-			$('#MEDIA_IMAGE').attr('src','');
-			$('#MEDIA_FRAME').attr('src','');
+	/* CLEAR MEDIA ELEMENTS */ 
+	$('#MEDIA_IMAGE').attr('src','');
+	$('#MEDIA_FRAME').attr('src','');
 
-			/* DISPLAY MEDIA */
-			if ( elem.ftype == 'IMG' ) {
-				$('#MEDIA_IMAGE').attr('src','/media/'+elem.fname);
-				$('#MEDIA_IMAGE').fadeIn(animSpeed);
-			}
-
+		/* DISPLAY MEDIA */
+		if ( elem.ftype == 'IMG' ) {
+			$('#MEDIA_IMAGE').attr('src','/media/'+elem.fname).delay(100).fadeIn(300);
 		}
-	});
 
 	/* END */
 	// alert(JSON.stringify(elem));
-}
-
-/* ***************************************************
- * 
- * 	DISPLAY CONTENT.-
- * 
- * *************************************************** */
-function displayImage(src) {
-	clearDisplays(function(){ 
-	});
-}
-function displayFile() {
-	clearDisplays(function(){ 
-	});
-}
-function displayFrame(src) {
-	clearDisplays(function(){ 
-		$('#MEDIA_FRAME').attr('src','/media/'+src);
-		$('#MEDIA_FRAME').fadeIn('slow');
-	});
-}
-function clearDisplays(callback) {
-
 }
 
 /* ***************************************************
@@ -119,6 +90,13 @@ function clearDisplays(callback) {
  * 
  * *************************************************** */
 function playNext() { 
+
+	// Check lock.-
+	if (fetchInProgress())
+		return;
+	if (isPlayLocked())
+		return;
+ 	lockPlay();
 	
 	// PLAY LOOP? 
 	if (!isLoop()) {
@@ -126,10 +104,6 @@ function playNext() {
 		// Check queue size.-
 		if (window.QUEUE_NEXT.length<2) 
 			return;
-
-		// Check element is not the same.-
-		if (window.QUEUE_NEXT.length>0 && window.QUEUE_NEXT[0].id == window.NOW_PLAYING.id)	
-			window.QUEUE_NEXT.shift();
 
 		// Add current to the top of the previous cache.-
 		window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
@@ -141,13 +115,23 @@ function playNext() {
 	// Move cursor up.-
 	setCursorUp();
 
+	// Async fetch for other elements.-
+	playme(window.NOW_PLAYING);
+
 	// Automatic fetch for other elements.-
 	fetch();	
 
-	// Async fetch for other elements.-
-	playme(window.NOW_PLAYING);
+	// Release lock.- 
+	unlockPlay();
 }
 function playPrevious() {
+
+	// Check lock.-
+	if (fetchInProgress())  
+		return;
+	if (isPlayLocked())
+		return;
+ 	lockPlay();
 	
 	// PLAY LOOP? 
 	if (!isLoop()) {
@@ -155,10 +139,6 @@ function playPrevious() {
 		// Check queue size.-
 		if (window.QUEUE_PREVIOUS.length<2) 
 			return;
-
-		// Check element is not the same.-
-		if (window.QUEUE_PREVIOUS.length>0 && window.QUEUE_PREVIOUS[window.QUEUE_PREVIOUS.length-1].id == window.NOW_PLAYING.id)	
-			window.QUEUE_PREVIOUS.pop();
 
 		// Add current to the beginning of the next cache.-
 		window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
@@ -176,4 +156,13 @@ function playPrevious() {
 
 	// Async fetch for other elements.-
 	fetch();	
+
+	// Release lock.- 
+	unlockPlay();
 }
+
+/* PREVENT FROM PLAYING TOO FAST */
+window.PLOCK = false;
+function lockPlay() 	{ window.PLOCK = true; }
+function unlockPlay() 	{ window.PLOCK = false; }
+function isPlayLocked() { return window.PLOCK == true; }

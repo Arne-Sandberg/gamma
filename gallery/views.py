@@ -102,13 +102,11 @@ def fetch(request):
 	if isRandom:
 		for i in range(0,settings.PLAYLIST_FETCH_CACHE):
 			q = random.randint(0,playlist.count()-1)
-			if q != MYCURSOR:
-				list2['cacheNext'].append(playlist[q].serialize())
+			list2['cacheNext'].append(playlist[q].serialize())
 		for i in range(0,settings.PLAYLIST_FETCH_CACHE):
 			q = random.randint(0,playlist.count()-1)
 			list2['cachePrevious'].append(playlist[q].serialize())
-			if q != MYCURSOR:
-				list2['cacheNext'].append(playlist[q].serialize())
+			list2['cacheNext'].append(playlist[q].serialize())
 
 	# IF NOT RANDOM.-
 	else:

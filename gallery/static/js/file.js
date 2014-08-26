@@ -128,7 +128,7 @@ function playNext() {
 			return;
 
 		// Check element is not the same.-
-		if (window.QUEUE_NEXT[window.QUEUE_PREVIOUS.length].id == window.NOW_PLAYING.id)	
+		if (window.QUEUE_NEXT.length>0 && window.QUEUE_NEXT[0].id == window.NOW_PLAYING.id)	
 			window.QUEUE_NEXT.shift();
 
 		// Add current to the top of the previous cache.-
@@ -156,12 +156,12 @@ function playPrevious() {
 		if (window.QUEUE_PREVIOUS.length<2) 
 			return;
 
+		// Check element is not the same.-
+		if (window.QUEUE_PREVIOUS.length>0 && window.QUEUE_PREVIOUS[window.QUEUE_PREVIOUS.length-1].id == window.NOW_PLAYING.id)	
+			window.QUEUE_PREVIOUS.pop();
+
 		// Add current to the beginning of the next cache.-
 		window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
-
-		// Check element is not the same.-
-		if (window.QUEUE_PREVIOUS[0].id == window.NOW_PLAYING.id)	
-			window.QUEUE_PREVIOUS.pop();
 
 		// Get last element of the previous cache.-
 		window.NOW_PLAYING = window.QUEUE_PREVIOUS.pop();

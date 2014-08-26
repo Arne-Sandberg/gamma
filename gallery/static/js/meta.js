@@ -120,10 +120,13 @@
 
 	// Set status.-
 	function setPlay() {
+		setPlayStatus(2);
+		window.QUEUE_NEXT = new Array;
+		window.QUEUE_PREVIOUS = new Array;
+		fetch();
 		startPlayer();
 		$('#playBtn span').hide();
 		$('#playBtn #gplay').show();
-		setPlayStatus(2);
 			
 	}
 	function setRandom() {

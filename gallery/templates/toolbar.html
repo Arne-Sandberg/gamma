@@ -1,45 +1,37 @@
 
 <!-- DOWNLOAD --> 
-<a class='downloadLink' href="" download="" >
-<button type="button" class="btn btn-lg btn-info">
-	<span class="glyphicon glyphicon glyphicon-save"></span>
-</button>
-</A>
+<div type="button" class="btn btn-lg btn-default" > 
+	<a id='downloadLink' type="button" href="" download="" >
+		<span class="glyphicon glyphicon glyphicon-save"></span> 
+	</a>
+</div>
 
 <!-- LOOP --> 
-<A HREF="#" onClick='playBtn();'>
-<button type="button" id='playBtn' class="btn btn-lg btn-default">
+<button type="button" id='playBtn' class="btn btn-lg btn-default" onClick='playBtn();'>
 	<span id='gstop' class="glyphicon glyphicon-stop"></span>
 	<span id='gplay' class="glyphicon glyphicon-play"></span>
 	<span id='grand' class="glyphicon glyphicon-random"></span>
 	<span id='gloop' class="glyphicon glyphicon-repeat"></span>
 </button>
-</A>
 
 <!-- FULLSCRENN -->
-<A HREF='#' onclick="toggleFullScreen(document.body)" >
- <button type="button" class="btn btn-lg btn-default">
+ <button type="button" class="btn btn-lg btn-default" onclick="toggleFullScreen(document.body)">
 	<span class="glyphicon glyphicon glyphicon-fullscreen"></span>
 </button>
-</A>
 
 
 <!-- SUPERUSER TOOLS --> 
 {% if request.user.is_superuser %} 
 
 	<!-- MOD --> 
-	<A HREF="#" onClick='editFile();'>
-	<button type="button" class="btn btn-lg btn-default">
+	<button type="button" class="btn btn-lg btn-default" onClick='editFile();' >
 		<span class="glyphicon glyphicon-cog"></span>
 	</button>
-	</A>
 
 	<!-- REMOVE --> 
-	<A HREF="#" onClick='removeFile();'>
-	<button type="button" class="btn btn-lg btn-danger">
+	<button type="button" class="btn btn-lg btn-danger" onClick='removeFile();' >
 		<span class="glyphicon glyphicon-remove"></span>
 	</button>
-	</A>
 
 <!-- END OF SUPERUSER TOOLS --> 
 {% endif %}

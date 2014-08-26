@@ -24,7 +24,7 @@ class Factory(models.Model):
 
 	# PROPERTIES.-
 	user	= models.ForeignKey(User,null=False)
-	name 	= models.CharField(max_length=35,unique=False,null=False)
+	name 	= models.CharField(max_length=75,unique=False,null=False)
         date 	= models.DateTimeField(auto_now=False,auto_now_add=False,null=False,unique=False)
 
 	# META.-
@@ -221,7 +221,7 @@ class GFile(Factory):
 		if not extension: 
 			extension = self.extension()
 		ext_count = len(extension)
-		self.name = name[:20-ext_count] + self.extension()
+		self.name = name[:75-ext_count] + self.extension()
 
 	# SAVE.-
 	def save(self):

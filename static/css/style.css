@@ -19,6 +19,7 @@ input { border-radius: none !important; }
 .breadcrumb { margin-bottom:0%; _background:none; margin-right:1%; }
 .alert { margin:0%; }
 .progress { margin:0%; }
+.btn-group a { color: rgba(0,0,0,0.8) !important; }
 
 /* MAIN */
 #MAIN { min-height:40em; margin:1% 2%; }

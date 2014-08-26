@@ -17,6 +17,7 @@ function setCacheFetch(val) 	{ window.playlistCacheFetch = val; }
 function setPlaylistID(val) 	{ window.PLAYLISTID = val; } 
 function setCursorID(val)   	{ window.CURSORID = val; } 
 function setPlaylistCount(val) 	{ window.PLAYLISTCOUNT = val; } 
+function setFilePath(val) 	{ window.FILEPATH = val; } 
 
 /* METADATA GETTERS */
 function getFileID() 		{ return window.FILEID; }
@@ -30,6 +31,7 @@ function getCacheFetch() 	{ return window.playlistCacheFetch; }
 function getPlaylistID() 	{ return window.PLAYLISTID; } 
 function getCursorID()   	{ return window.CURSORID; } 
 function getPlaylistCount() 	{ return window.PLAYLISTCOUNT; } 
+function getFilePath() 		{ return window.FILEPATH; } 
 
 /* ***************************************************
  *

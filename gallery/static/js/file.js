@@ -15,6 +15,8 @@ function toggleFullScreen(elem) {
         } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
         }
+	$('.navbar').hide();
+	$('.progress').hide();
     } else {
         if (document.cancelFullScreen) {
             document.cancelFullScreen();
@@ -25,6 +27,8 @@ function toggleFullScreen(elem) {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
+	$('.navbar').show();
+	$('.progress').show();
     }
 }
 
@@ -45,6 +49,7 @@ function playme(elem) {
 	setFileType(elem.ftype);
 	setFolderID(elem.folder_id);
 	setFolderName(elem.folder_name);
+	setFilePath(elem.fname);
 
 	/* Update path */
 	clearPath();
@@ -54,22 +59,32 @@ function playme(elem) {
 	addFilePath(elem.id,elem.name);
 
 	/* Update download path */
-	var dw = $('.downloadLink');
+	var dw = $('#downloadLink');
 	dw.attr('href','/media/'+elem.fname);
 	dw.attr('download',elem.name);
 
-	/* DISPLAY ACCORDINT TO TYPE */
-	if (elem.ftype == 'IMG' ) 	displayImage(elem.fname);
-	else if (elem.ftype == 'PDF' ) 	displayFrame(elem.fname);
-	else if (elem.ftype == 'TXT' ) 	displayFrame(elem.fname);
-	else 				displayFile();
-
-	/* CHANGE WINDOW NAME */
+	/* CHANGE WINDOW NAME & WINDOW LOCATION WITHOUT RELOAD */
 	document.title = elem.name;
-
-	/* CHANGE WINDOW LOCATION WITHOUT RELOAD */
 	var myurl = '/gallery/'+elem.id+'/';
 	history.pushState(null, null, myurl)
+
+	/* HIDE CURRENT MEDIA */
+	var animSpeed = 100; 
+	$('.media_display').fadeOut(animSpeed,function() {
+		if ($(".media_display:animated").length === 0) {
+
+			/* CLEAR MEDIA ELEMENTS */ 
+			$('#MEDIA_IMAGE').attr('src','');
+			$('#MEDIA_FRAME').attr('src','');
+
+			/* DISPLAY MEDIA */
+			if ( elem.ftype == 'IMG' ) {
+				$('#MEDIA_IMAGE').attr('src','/media/'+elem.fname);
+				$('#MEDIA_IMAGE').fadeIn(animSpeed);
+			}
+
+		}
+	});
 
 	/* END */
 	// alert(JSON.stringify(elem));
@@ -81,22 +96,21 @@ function playme(elem) {
  * 
  * *************************************************** */
 function displayImage(src) {
-	clearDisplays();
-	$('#MEDIA_IMAGE').attr('src','/media/'+src);
-	$('#MEDIA_IMAGE').show();
+	clearDisplays(function(){ 
+	});
 }
 function displayFile() {
-	clearDisplays();
+	clearDisplays(function(){ 
+	});
 }
 function displayFrame(src) {
-	clearDisplays();
-	$('#MEDIA_FRAME').attr('src','/media/'+src);
-	$('#MEDIA_FRAME').show();
+	clearDisplays(function(){ 
+		$('#MEDIA_FRAME').attr('src','/media/'+src);
+		$('#MEDIA_FRAME').fadeIn('slow');
+	});
 }
-function clearDisplays() {
-	$('.media_display').hide();
-	$('#MEDIA_IMAGE').attr('src','');
-	$('#MEDIA_FRAME').attr('src','');
+function clearDisplays(callback) {
+
 }
 
 /* ***************************************************

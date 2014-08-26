@@ -106,15 +106,23 @@ function removeFile(){
 function fetch(){
 
 	/* GENERATE URL */
+	var fetchNext = false;
+	var fetchPrev = false;
         var url = "/gallery/fetch/?";
 	url = url + "&cursorID="+getCursorID();	
 	url = url + "&playlistID="+getPlaylistID();	
 	if ( isRandom() ) 
         	url = url + "&random=1";
-	if ( QUEUE_NEXT.length < getCacheFetch() ) 
+	if ( QUEUE_NEXT.length < getCacheFetch() ) {
+		fetchNext = true;
         	url = url + "&fetchNext=1";
-	if ( QUEUE_PREVIOUS.length < getCacheFetch() )
+	}
+	if ( QUEUE_PREVIOUS.length < getCacheFetch() ) {
         	url = url + "&fetchPrevious=1";
+		fetchPrev= true;
+	}	
+	if (!fetchNext && !fetchPrev) 
+		return;
 	// alert(url);
 
 	/* MAKE REQUEST */

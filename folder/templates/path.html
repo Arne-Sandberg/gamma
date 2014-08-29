@@ -1,5 +1,5 @@
 <!-- FOLDER PATH --> 
-{% for f in MYFOLDER.array_path reversed %}
+{% for f in MYFOLDER.array_path %}
 	<li><a href="{% url 'folder_folder' f.id %}">{{f.name}}</a></li>
 {% endfor %} 
 

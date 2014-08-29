@@ -11,41 +11,42 @@
 		<span class="glyphicon glyphicon glyphicon-chevron-right"></span>
 	</div>
 
-
 	<!-- MEDIA --> 
 	<div id='MEDIA_CONTAINER' class='row'>
 		<div class="col-xs-6 col-md-12">	
-			<IMG class='img-thumbnail media_display' ID='MEDIA_IMAGE' SRC='' />
-			<a class='media_display downloadLink' ID='MEDIA_FILE' href="" download="" ></a>
-			<iframe class='media_display' ID='MEDIA_FRAME' src=""></iframe> 	
+			<IMG    ID='MEDIA_IMAGE' src="" class='img-thumbnail' />
+			<!--
+			<div ID='MEDIA_VIDEO' src="" poster=""></div>
+			-->
+			<iframe ID='MEDIA_FRAME' src=""></iframe> 	
+			<div id="MEDIA_VIDEO" style="display:inline-block;">
+				<a href="http://get.adobe.com/flashplayer/">Instalar Flashplayer</a> 
+			</div>
+			<div id="MEDIA_SOUND" style="display:inline-block;">
+				<a href="http://get.adobe.com/flashplayer/">Instalar Flashplayer</a> 
+			</div>
 		</div>
 	</div>
 
-	<!-- DYNAMICALLY LOAD VALUES --> 
+	<!-- LOAD CURRENT OBJECT -->
 	<SCRIPT>
-
-		/* LOAD CURRENT OBJECT */
+		/* START ON LOAD */
 		$(window).load(function() {
 			setStop();
-			progress('50%');
 			fetchOne({{fid}},{{playlistID|default:0}},fetch);
-			progress('0%');
 		});
-
 		/* SET KEY MOVEMENT */
 		$('body').keydown(function(e) {
-                        //alert(e.keyCode);
-                        if(e.keyCode == 39) {
+			if(e.keyCode == 39) {
 				playNext();
-                        }
-                        else if(e.keyCode == 37) {
+			}
+			else if(e.keyCode == 37) {
 				playPrevious();
-                        }
-                        else if(e.keyCode == 13) {
+			}
+			else if(e.keyCode == 13) {
 				playBtn();
-                        }
-                });
-
+			}
+		});
 	</SCRIPT>
 
 {% endblock %}

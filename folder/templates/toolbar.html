@@ -4,7 +4,7 @@
 	<!-- UPLOAD FILE: ONLY IF SUPERUSER OR CAN WRITE TO FOLDER -->
 	{% if request.user.is_superuser or MYFOLDER.write %} 
 		<button type="button" class="btn btn-lg btn-default" onClick='upload();' >
-			<span class="glyphicon glyphicon glyphicon-open"></span>
+			<A> <span class="glyphicon glyphicon glyphicon-open"></span> </A>
 		</button>
 	{% endif %} 
 {% endif %} 
@@ -12,7 +12,7 @@
 <!-- PLAYLIST --> 
 {% if MYFOLDER.id %} 
 	<button type="button" class="btn btn-lg btn-default" onclick='location.href="/gallery/playlist/{{MYFOLDER.id}}/"'>
-		<span class="glyphicon glyphicon glyphicon-film"></span>
+		<A> <span class="glyphicon glyphicon glyphicon-film"></span> </A>
 	</button>
 {% endif %} 
 
@@ -21,7 +21,7 @@
 
 	<!-- ADD --> 
 	<button type="button" class="btn btn-lg btn-default" onClick='addFolder();'>
-		<span class="glyphicon glyphicon-plus"></span>
+		<A> <span class="glyphicon glyphicon-plus"></span> </A>
 	</button>
 
 	<!-- FOLDER TOOLS  --> 
@@ -29,33 +29,33 @@
 
 		<!-- DOWNLOAD ZIP --> 
 		<button type="button" class="btn btn-lg btn-default" onClick='zipFolder();' >
-			<span class="glyphicon glyphicon glyphicon-save"></span> 
+			<A> <span class="glyphicon glyphicon glyphicon-save"></span> </A>
 		</button>
 
 		<!-- MOD --> 
 		<button type="button" class="btn btn-lg btn-default" onClick='editFolder();' > 
-			<span class="glyphicon glyphicon-cog"></span> 
+			<A> <span class="glyphicon glyphicon-cog"></span> </A> 
 		</button>
 
 		<!-- READ --> 
 		<button type="button" class="btn btn-lg btn-default" onClick='readFolder();'>
-			<span class="glyphicon 
+			<A> <span class="glyphicon 
 				{% if MYFOLDER.read %} glyphicon-eye-open
 				{% else %} glyphicon-ban-circle {% endif %} 
-			"></span>
+			"></span> </A>
 		</button>
 
 		<!-- WRITE --> 
 		<button type="button" class="btn btn-lg btn-default" onClick='writeFolder();'>
-			<span class="glyphicon glyphicon 
+			<A> <span class="glyphicon glyphicon 
 				{% if MYFOLDER.write %} glyphicon-pencil
 				{% else %} glyphicon-ban-circle {% endif %} 
-			"></span>
+			"></span> </A>
 		</button>
 
 		<!-- REMOVE --> 
 		<button type="button" class="btn btn-lg btn-danger" onClick='removeFolder();'>
-			<span class="glyphicon glyphicon-remove"></span>
+			<A> <span class="glyphicon glyphicon-remove"></span> </A> 
 		</button>
 
 	<!-- END OF FOLDER TOOLS --> 

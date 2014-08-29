@@ -4,6 +4,7 @@
 .media_display { }
 #MEDIA_IMAGE {}
 #MEDIA_FRAME { width:100%; height: 40em; }
+#MEDIA_SOUND { position:fixed; left:0%; bottom:10%; width:100%; }
 
 /* NEXT AND PREVIOUS ARROWS */
 .myArrow { 

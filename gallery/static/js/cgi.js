@@ -174,9 +174,10 @@ function fetchInProgress()	{ return window.FLOCK == true; }
  * 
  * *************************************************** */
 function fetchOne(id,playlistID,callback) {
+	progress('10%');
         var url = "/gallery/get/"+id+"/";
 	if (playlistID) 
-		url = url + "&?playlistID="+playlistID;
+		url = url + "?playlistID="+playlistID;
         $.ajax({
                 type:           "GET",
                 dataType:       'json',
@@ -194,9 +195,11 @@ function fetchOne(id,playlistID,callback) {
 						playme(data.file);
 						callback();
                                         }
+					progress('0%');
                                 },
                 error:          function(e,msg) {
                                         alert("ERROR " + msg);
+					progress('0%');
                 }
         });
 }

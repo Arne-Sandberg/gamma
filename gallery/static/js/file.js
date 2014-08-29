@@ -1,39 +1,6 @@
 
 /* ***************************************************
  * 
- * 	TOGGLE FULLSCREEN
- * 
- * *************************************************** */
-function toggleFullScreen(elem) {
-    if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-        if (elem.requestFullScreen) {
-            elem.requestFullScreen();
-        } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullScreen) {
-            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
-        }
-	$('.navbar').hide();
-	$('.progress').hide();
-    } else {
-        if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
-	$('.navbar').show();
-	$('.progress').show();
-    }
-}
-
-/* ***************************************************
- * 
  * 	PLAY ONE FILE.-
  * 
  * *************************************************** */
@@ -69,20 +36,82 @@ function playme(elem) {
 	history.pushState(null, null, myurl)
 
 	/* HIDE CURRENT MEDIA */
-	$('.media_display').css('display','none');
+	$('#MEDIA_CONTAINER div *').css('display','none');
+	$('#MEDIA_CONTAINER div *').hide('fast');
 
 	/* CLEAR MEDIA ELEMENTS */ 
 	$('#MEDIA_IMAGE').attr('src','');
+	$('#MEDIA_VIDEO').attr('src','');
 	$('#MEDIA_FRAME').attr('src','');
 
-		/* DISPLAY MEDIA */
-		if ( elem.ftype == 'IMG' ) {
-			$('#MEDIA_IMAGE').attr('src','/media/'+elem.fname).delay(100).fadeIn(300);
-		}
+	/* DISPLAY MEDIA */
+	if ( elem.ftype == 'IMG' ) 
+		$('#MEDIA_IMAGE').attr('src','/media/'+elem.fname).fadeIn(300);
+
+	/* PLAY VIDEO */
+	else if ( elem.ftype == 'VID') { 
+		progress('10%');
+		var flashvars_1990 = {};
+		var params_1990 = {
+        		quality:                "high",
+        		wmode:                  "transparent",
+        		bgcolor:                "#ffffff",
+        		allowScriptAccess:      "always",
+        		allowFullScreen:        "true",
+        		flashvars:              "fichier="+encodeURIComponent('/media/'+elem.fname)
+		};
+		var attributes_1990 = {
+			id: 'mediaPlayer'
+		};
+		progress('50%');
+		flashObject('/static/flash/v1_26.swf', "MEDIA_VIDEO", "1024", "600", "8", false, 
+							flashvars_1990, params_1990, attributes_1990);
+		$("#MEDIA_VIDEO").delay(100).fadeIn(300);
+		progress('100%');
+		setTimeout(function(){ progress('0%'); },400);
+	}
+
+	/* PLAY MUSIC */
+	else if ( elem.ftype == 'AUD') { 
+		var flashvars_9719 = {};
+		var params_9719 = {
+			quality: "high",
+			wmode: "transparent",
+			bgcolor: "#ffffff",
+			allowScriptAccess: "always",
+			allowFullScreen: "true",
+			flashvars: "url="+encodeURIComponent('/media/'+elem.fname)+"&autostart=on"
+		};
+		var attributes_9719 = {
+			id: 'mediaPlayer'
+		};
+		flashObject("/static/flash/s_8.swf", "MEDIA_SOUND", "90%", "50", "8", false, 
+						flashvars_9719, params_9719, attributes_9719);
+		$("#MEDIA_SOUND").delay(100).fadeIn(300);
+		progress('100%');
+		setTimeout(function(){ progress('0%'); },400);
+	}
+
+	/* ADD EVENT */ 
+	$(window).load(function(){
+	var obj = $("#MEDIA_SOUND object embed");
+	obj.bind('onStateChange',onPlayerStateChange);
+	obj.bind('onFinish',onPlayerStateChange);
+	obj.bind('finish',onPlayerStateChange);
+	alert(obj.id);
+	});
 
 	/* END */
 	// alert(JSON.stringify(elem));
 }
+
+function onPlayerStateChange (state) {
+	alert(3);
+	alert(state);
+    if (state === 0) {
+        alert("Stack Overflow rocks!");
+    }
+};
 
 /* ***************************************************
  * 
@@ -91,19 +120,24 @@ function playme(elem) {
  * *************************************************** */
 function playNext() { 
 
-	// Check lock.-
+	// Return if player is in progress or play is locked 
+	// or if the queue is empty.-
 	if (fetchInProgress())
 		return;
 	if (isPlayLocked())
 		return;
  	lockPlay();
+	if (window.QUEUE_NEXT.length<2) 
+		return;
+
+	// Reset player counter.-
+	if (isPlaying() || isLoop() || isRandom() ) {
+		stopPlayer();
+		startPlayer();
+	}
 	
 	// PLAY LOOP? 
 	if (!isLoop()) {
-
-		// Check queue size.-
-		if (window.QUEUE_NEXT.length<2) 
-			return;
 
 		// Add current to the top of the previous cache.-
 		window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
@@ -126,19 +160,24 @@ function playNext() {
 }
 function playPrevious() {
 
-	// Check lock.-
+	// Return if player is in progress or play is locked 
+	// or if the queue is empty.-
 	if (fetchInProgress())  
 		return;
 	if (isPlayLocked())
 		return;
+	if (window.QUEUE_NEXT.length<2) 
+		return;
  	lockPlay();
+
+	// Reset player counter.-
+	if (isPlaying() || isLoop() || isRandom() ) {
+		stopPlayer();
+		startPlayer();
+	}
 	
 	// PLAY LOOP? 
 	if (!isLoop()) {
-
-		// Check queue size.-
-		if (window.QUEUE_PREVIOUS.length<2) 
-			return;
 
 		// Add current to the beginning of the next cache.-
 		window.QUEUE_NEXT.unshift(window.NOW_PLAYING);

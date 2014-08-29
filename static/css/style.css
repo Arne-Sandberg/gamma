@@ -20,11 +20,13 @@ input { border-radius: none !important; }
 .alert { margin:0%; }
 .progress { margin:0%; }
 .btn-group a { color: rgba(0,0,0,0.8) !important; }
+.pagination span { font-size:1.4em; }
 
 /* MAIN */
 #MAIN { min-height:40em; margin:1% 2%; }
 #TOOLBAR { margin:1% 1%; font-size:1.5em; }
 #TOOLBAR A { text-decoration:none; }
+#shadow { position:absolute; z-index:10000; background:black;opacity:0.9;width:100%;min-height:120em;opacity:0.5;display:none;}
 
 /* FORM */
 .myform { TABLE-LAYOUT:FIXED; width:50%; padding:2%; background:rgba(255,255,255,0.7); font-size:1.2em; }

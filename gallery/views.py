@@ -141,7 +141,7 @@ def fetch(request):
 # -------------------------------------------------------------------
 @login_required
 def gallery(request,fid):
-	playlistID = request.GET.get('playlistId')
+	playlistID = request.GET.get('playlistID')
 	return render(request,"gallery/templates/gallery.html",locals())
 
 # -------------------------------------------------------------------

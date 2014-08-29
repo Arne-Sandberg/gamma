@@ -18,14 +18,10 @@
 		<SCRIPT NAME='JQUERY-UI' SRC='//code.jquery.com/ui/1.10.3/jquery-ui.js' ></SCRIPT>
 		<LINK NAME='JQUERY-UI' REL='stylesheet' TYPE='TEXT/CSS' HREF='//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' />
 
-
 	<!-- *********************************************************
 	* ONLOAD.-
 	*********************************************************** --> 
 	<SCRIPT NAME='ONLOAD'>
-		$(document).ready(function() { 
-			{% block javascript-onload %} {% endblock %} 
-		});
 		window.MEDIA_URL 	= '{{MEDIA_URL}}';  
 		window.STATIC_URL   	= '{{STATIC_URL}}';  
 		window.QUERY_STRING 	= '{{request.META.QUERY_STRING}}';

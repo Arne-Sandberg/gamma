@@ -231,7 +231,7 @@ class GFile(Factory):
 			self.type = 'AUD'
 		elif self.extension() in ['.jpg','.png','.jpeg','.gif']:
 			self.type = 'IMG'
-		elif self.extension() in ['.mp4','.mpeg','.3gp']:
+		elif self.extension() in ['.mp4','.mpeg','.3gp','.ogv','.ogg','flv',]:
 			self.type = 'VID'
 		elif self.extension() in ['.pdf']:
 			self.type = 'PDF'

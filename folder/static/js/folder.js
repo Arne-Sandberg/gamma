@@ -245,6 +245,7 @@ function fileListener(input) {
 		myform.append('fid',fid);
 
 		/* MAKE SYNCHRONIZED REQUEST TO BACKEND */
+		shadowOn();
 		$.ajax({
       			url: url,
       			type: 'POST',
@@ -268,6 +269,7 @@ function fileListener(input) {
 	}
 
 	/* RELOAD WHEN EVERYTHING IS DONE */
+	shadowOff();
 	progress('100%');
 	location.reload();
 }
@@ -284,6 +286,7 @@ function zipFolder(){
 	data['fid'] 	= fid;
 
 	/* MAKE REQUEST */
+	shadowOn();
 	progress('50%');
 	var url = "/folder/zip/";
 	$.ajax({
@@ -295,8 +298,10 @@ function zipFolder(){
                         		if (data.status==0) {
 						progress('0%');
                                 		alert(data.message);
+						shadowOff();
                         		} else {
 						progress('100%');
+						shadowOff();
 						prompt("Clave",data.pass);
 						progress('0%');
 						location.href="/media/"+data.src;
@@ -306,6 +311,7 @@ function zipFolder(){
 					progress('0%');
                         		alert("ERROR");
                         		alert(msg);
+					shadowOff();
                 }
         });
 }

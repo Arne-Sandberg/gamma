@@ -8,29 +8,25 @@
 
 <!-- LOOP --> 
 <button type="button" id='playBtn' class="btn btn-lg btn-default" onClick='playBtn();'>
+	<A>
 	<span id='gstop' class="glyphicon glyphicon-stop"></span>
 	<span id='gplay' class="glyphicon glyphicon-play"></span>
 	<span id='grand' class="glyphicon glyphicon-random"></span>
 	<span id='gloop' class="glyphicon glyphicon-repeat"></span>
+	</A>
 </button>
-
-<!-- FULLSCRENN -->
- <button type="button" class="btn btn-lg btn-default" onclick="toggleFullScreen(document.body)">
-	<span class="glyphicon glyphicon glyphicon-fullscreen"></span>
-</button>
-
 
 <!-- SUPERUSER TOOLS --> 
 {% if request.user.is_superuser %} 
 
 	<!-- MOD --> 
 	<button type="button" class="btn btn-lg btn-default" onClick='editFile();' >
-		<span class="glyphicon glyphicon-cog"></span>
+		<A> <span class="glyphicon glyphicon-cog"></span> </A>
 	</button>
 
 	<!-- REMOVE --> 
 	<button type="button" class="btn btn-lg btn-danger" onClick='removeFile();' >
-		<span class="glyphicon glyphicon-remove"></span>
+		<A> <span class="glyphicon glyphicon-remove"></span> </A>
 	</button>
 
 <!-- END OF SUPERUSER TOOLS --> 

@@ -6,8 +6,8 @@ function progress(i) {
 
 /* TOGGLE SHADOW ON AND OFF */
 function shadowOn() {
-	$('#shadow').fadeIn('100');
+	$('#shadow').css('display','block');
 }
 function shadowOff() {
-	$('#shadow').fadeOut('300');
+	$('#shadow').css('display','none');
 }

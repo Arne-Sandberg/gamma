@@ -236,6 +236,7 @@ function fileListener(input) {
 	}
 
 	/* FOR EACH FILE */
+	shadowOn();
 	for (var i=0; i<window.uploadSize; i++) {
 
 		/* SUBMIT SINGLE FILE */
@@ -245,7 +246,6 @@ function fileListener(input) {
 		myform.append('fid',fid);
 
 		/* MAKE SYNCHRONIZED REQUEST TO BACKEND */
-		shadowOn();
 		$.ajax({
       			url: url,
       			type: 'POST',

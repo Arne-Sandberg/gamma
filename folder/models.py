@@ -227,7 +227,7 @@ class GFile(Factory):
 	def save(self):
 
 		#CHECK FILE TYPE.-
-		if self.extension() in ['.mid','.mp3']:
+		if self.extension() in ['.mid','.mp3','.MP3',]:
 			self.type = 'AUD'
 		elif self.extension() in ['.jpg','.png','.jpeg','.gif']:
 			self.type = 'IMG'

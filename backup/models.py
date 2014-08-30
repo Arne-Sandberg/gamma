@@ -7,6 +7,7 @@ from django.db.models import Sum, Avg
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from Crypto.Cipher import Blowfish
+from folder.models import *
 import random
 import os
 import binascii
@@ -17,19 +18,20 @@ import time
 # -----------------------------------------------------------------------------------------------
 # FACTORY/
 # -----------------------------------------------------------------------------------------------
-class Factory(models.Model):
+class Backup(models.Model):
 
 	# READONLY.-
 	READONLY=[]
 
 	# PROPERTIES.-
-	user	= models.ForeignKey(User,null=False)
 	name 	= models.CharField(max_length=75,unique=False,null=False)
-        date 	= models.DateTimeField(auto_now=False,auto_now_add=False,null=False,unique=False)
+	cloud 	= models.BooleanField(default=False)	
+	local	= models.BooleanField(default=False)	
+        date = models.DateTimeField(auto_now=False,auto_now_add=False,null=False,unique=False)
 
 	# META.-
 	class Meta:
-        	app_label = 'folder'
+        	app_label = 'backup'
         	abstract = True
 		ordering = ['name',]
 

@@ -23,7 +23,8 @@
 
 		<!-- LEFT NAV -->
 		<ul class="nav navbar-nav navbar-left">
-			<LI><A HREF='{% url 'folder_home' %}'><span class="glyphicon glyphicon-home"> Gamma</span></A></LI>
+			<LI><A HREF='{% url 'home' %}'><span class="glyphicon glyphicon-home"> Gamma</span></A></LI>
+			<LI><A HREF='{% url 'folder_home' %}'><span class="glyphicon glyphicon-th-large"> Carpetas</span></A></LI>
 		</ul>
 
 		<!-- RIGHT NAV --> 
@@ -75,6 +76,7 @@
 	*	TOOLBAR.-
 	*
 	*********************************************************** --> 
+	{% block mainbar %} 
 	<DIV ID='TOOLBAR' class="row">
 
 		<!-- PATH --> 
@@ -94,6 +96,7 @@
 
 	<!-- END OF TOOLBAR --> 
 	</DIV>
+	{% endblock %} 
 
 	<!-- *********************************************************
 	*

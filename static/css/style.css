@@ -41,3 +41,11 @@ input { border-radius: none !important; }
 .ui-state-focus           { COLOR: BLACK   !important; background: #EEEEEE !important; }
 .ui-state-focus *         { COLOR: BLACK   !important; background: #EEEEEE !important; }
 
+/* HOME */
+#DF { width:100% !important; text-align:center; background:none; opacity:0.9; margin:0% 0%; }
+#DF h1 { margin-bottom:5%; }
+#carousel-example-generic { width:100%; text-align:center; text-decoration:none; }
+#carousel-example-generic a:hover { text-decoration:none; }
+.carousel-inner .item img { width:100%; height:auto; left: 00%; margin-top: -10%; position: relative;}
+.carousel-inner .item { max-height:45em; overflow:hidden; }
+#home_container { width:60%; margin-left:20%; background:rgba(255,255,255,0.6);}

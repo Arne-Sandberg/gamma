@@ -64,6 +64,7 @@ function playme(elem) {
 			id: 'mediaPlayer'
 		};
 		progress('50%');
+		// flashObject('/static/flash/watch_as3.swf', "MEDIA_VIDEO", "1024", "600", "8", false, 
 		flashObject('/static/flash/v1_26.swf', "MEDIA_VIDEO", "1024", "600", "8", false, 
 							flashvars_1990, params_1990, attributes_1990);
 		$("#MEDIA_VIDEO").delay(100).fadeIn(300);

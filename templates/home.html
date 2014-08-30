@@ -1,6 +1,65 @@
 {% extends 'templates/main.html' %}
 {% block wtitle %} Inicio {% endblock %}
-
+{% block mainbar %} {% endblock %} 
 {% block main-screen-read  %}
+<div id='home_container' class='thumbnail'>
+
+	<!-- CARROUSEL -->
+	{% if table %} 
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+  		<!-- Indicators -->
+  		<ol class="carousel-indicators">
+			{% for img in table %} 
+    				<li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}" 
+						{% if forloop.counter = 1 %} class="active"{% endif %} ></li>
+			{% endfor %} 
+  		</ol>
+
+  		<!-- Wrapper for slides -->
+  		<div class="carousel-inner" >
+			{% for img in table %} 
+    			<div class="item {% if forloop.counter = 1 %}active{% endif %}">
+				<A HREF='/gallery/{{img.id}}/'>
+      				<img src="{{MEDIA_URL}}{{img.file.name}}" alt="...">
+      				<div class="carousel-caption">
+					<h3>{{img.name}}<h3>		
+					<p>{{img.user.username}} ~ {{img.date}}</p>
+      				</div>
+				</A>
+      			</div>
+			{% endfor %} 
+  		</div>
+
+  		<!-- Controls -->
+  		<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    			<span class="glyphicon glyphicon-chevron-left"></span>
+  		</a>
+  		<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    			<span class="glyphicon glyphicon-chevron-right"></span>
+  		</a>
+
+	<!-- END OF CARROUSEL --> 
+	</div>
+	{% endif %} 
+
+	<!-- IF ROOT --> 
+	{% if request.user.is_superuser %}
+
+		<div id='DF' class="jumbotron" >
+  			<h1>{{MEDIA_ROOT}}</h1>
+			<div class="progress">
+  				<div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" 
+								aria-valuemin="0" aria-valuemax="100" style="width: {{df}}">
+  				</div>
+			</div>
+		</div>
+		
+	{% endif %} 
+	<!--
+ 		<iframe class="embed-responsive-item" src="/media/59/94/105/1409289656_303259143323511.mp3"></iframe>
+	-->
+
+</div>
 {% endblock %}
 

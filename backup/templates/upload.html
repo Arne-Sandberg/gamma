@@ -1,0 +1,6 @@
+<form id='fileform' action="#" method="post" enctype="multipart/form-data" target="upload_target" >
+	<input id='TASK_UPLOAD_FILE_MAX_SIZE' value='{{TASK_UPLOAD_FILE_MAX_SIZE}}' class='HIDDEN'>
+	<div id='csrf'>{% csrf_token %}</div>
+	<input id='fileinput' type="file" multiple onchange='fileListener(this);'>
+	<input id='submitBtn' type="submit" name="submitBtn" value="Upload" class='HIDDEN' />
+</form>

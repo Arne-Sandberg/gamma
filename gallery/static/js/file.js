@@ -67,7 +67,7 @@ function playme(elem) {
 		// flashObject('/static/flash/watch_as3.swf', "MEDIA_VIDEO", "1024", "600", "8", false, 
 		flashObject('/static/flash/v1_26.swf', "MEDIA_VIDEO", "1024", "600", "8", false, 
 							flashvars_1990, params_1990, attributes_1990);
-		$("#MEDIA_VIDEO").delay(100).fadeIn(300);
+		$("#MEDIA_VIDEO").fadeIn();
 		progress('100%');
 		setTimeout(function(){ progress('0%'); },400);
 	}
@@ -88,7 +88,7 @@ function playme(elem) {
 		};
 		flashObject("/static/flash/s_8.swf", "MEDIA_SOUND", "90%", "50", "8", false, 
 						flashvars_9719, params_9719, attributes_9719);
-		$("#MEDIA_SOUND").delay(100).fadeIn(300);
+		$("#MEDIA_SOUND").fadeIn();
 		progress('100%');
 		setTimeout(function(){ progress('0%'); },400);
 	}
@@ -131,21 +131,11 @@ function playNext() {
 	if (window.QUEUE_NEXT.length<2) 
 		return;
 
-	// Reset player counter.-
-	if (isPlaying() || isLoop() || isRandom() ) {
-		stopPlayer();
-		startPlayer();
-	}
-	
-	// PLAY LOOP? 
-	if (!isLoop()) {
+	// Add current to the top of the previous cache.-
+	window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
 
-		// Add current to the top of the previous cache.-
-		window.QUEUE_PREVIOUS.push(window.NOW_PLAYING);
-
-		// Get first element of the next cache.-
-		window.NOW_PLAYING = window.QUEUE_NEXT.shift();
-	}
+	// Get first element of the next cache.-
+	window.NOW_PLAYING = window.QUEUE_NEXT.shift();
 
 	// Move cursor up.-
 	setCursorUp();
@@ -171,22 +161,11 @@ function playPrevious() {
 		return;
  	lockPlay();
 
-	// Reset player counter.-
-	if (isPlaying() || isLoop() || isRandom() ) {
-		stopPlayer();
-		startPlayer();
-	}
-	
-	// PLAY LOOP? 
-	if (!isLoop()) {
+	// Add current to the beginning of the next cache.-
+	window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
 
-		// Add current to the beginning of the next cache.-
-		window.QUEUE_NEXT.unshift(window.NOW_PLAYING);
-
-		// Get last element of the previous cache.-
-		window.NOW_PLAYING = window.QUEUE_PREVIOUS.pop();
-
-	}
+	// Get last element of the previous cache.-
+	window.NOW_PLAYING = window.QUEUE_PREVIOUS.pop();
 
 	// Move cursor down.-
 	setCursorDown();

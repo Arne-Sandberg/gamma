@@ -76,90 +76,26 @@
 
 /* ***************************************************
  *
- * 	PLAY / STOP / RANDOM / LOOP 
- * 	1 = Stopped.-
- *	2 = Play linear.-
- * 	3 = Play random.-
- * 	4 = Play repeat.-
+ * 	SWITCH RANDOM.-
  *
  * *************************************************** */
 
-	/* THESE WILL HOLD THE PLAYER DATA */
-	var timer = null, interval = 7000;
-	function startPlayer() {
-		if (timer !== null) return;
-      		timer = setInterval(function () {
-			var type = getFileType();
-			if (type=='AUD') {
-			}
-			else if (type=='VID') {
-			}
-			else 
-				playNext();
-      		}, interval); 
-	}
-	function stopPlayer() {
-		clearInterval(timer);
-      		timer = null
-	}	
-
 	/* PLAY STATUS */
-	function setPlayStatus(val) 	{ window.PLAY_STATUS = val; }	
-	function getPlayStatus() 	{ return window.PLAY_STATUS; }	
-	function isStopped() 		{ return getPlayStatus()==1; }
-	function isPlaying() 		{ return getPlayStatus()==2; }
-	function isRandom()  		{ return getPlayStatus()==3; }
-	function isLoop()    		{ return getPlayStatus()==4; }
-	function nextPlayStatus() { 
-		var p = getPlayStatus();
-		p++;
-		if (p>4)
-			p = 1;
-		setPlayStatus(p);
-	}
-
-	// Set status.-
-	function setPlay() {
-		setPlayStatus(2);
-		window.QUEUE_NEXT = new Array;
-		window.QUEUE_PREVIOUS = new Array;
+	function isRandom()  		{ return window.RANDOM == 1; }
+	function switchRandom() 	{
+		if (isRandom()) {
+			window.RANDOM = 0;
+			$('#playBtn #rand').hide();
+			$('#playBtn #none').show();
+		}
+		else {
+			window.RANDOM = 1;
+			$('#playBtn #none').hide();
+			$('#playBtn #rand').show();
+		}
+		window.QUEUE_NEXT 	= new Array;
+		window.QUEUE_PREVIOUS 	= new Array;
 		fetch();
-		startPlayer();
-		$('#playBtn span').hide();
-		$('#playBtn #gplay').show();
-			
-	}
-	function setRandom() {
-		setPlayStatus(3);
-		window.QUEUE_NEXT = new Array;
-		window.QUEUE_PREVIOUS = new Array;
-		fetch();
-		$('#playBtn span').hide();
-		$('#playBtn #grand').show();
 
-	}
-	function setLoop() {
-		$('#playBtn span').hide();
-		$('#playBtn #gloop').show();
-		setPlayStatus(4);
-			
-	}
-	function setStop() {
-		stopPlayer();
-		$('#playBtn span').hide();
-		$('#playBtn #gstop').show();
-		setPlayStatus(1);
-	}
-
-	/* PLAY BUTTON -> STOP -> PLAY -> RANDOM -> LOOP */
-	function playBtn() {
-		if (isStopped()) 
-			setPlay();
-		else if (isPlaying()) 
-			setRandom();
-		else if (isRandom()) 
-			setLoop();
-		else if (isLoop()) 
-			setStop();
 	}
 

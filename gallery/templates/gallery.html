@@ -32,7 +32,7 @@
 	<SCRIPT>
 		/* START ON LOAD */
 		$(window).load(function() {
-			setStop();
+			$('#playBtn #rand').hide();
 			fetchOne({{fid}},{{playlistID|default:0}},fetch);
 		});
 		/* SET KEY MOVEMENT */

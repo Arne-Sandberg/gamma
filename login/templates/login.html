@@ -2,6 +2,7 @@
 {% block wtitle %} Login {% endblock %}
 {% block custom-js %}  <SCRIPT NAME='LOGIN'   SRC='{{STATIC_URL}}js/auth.js'></SCRIPT>		 	{% endblock %}
 {% block custom-css %} <LINK   NAME='LOGIN'   REL="stylesheet" HREF="{{STATIC_URL}}css/auth.css" /> 	{% endblock %}
+{% load url from future %}
 {% block body %}
 	<DIV ID='loginbox'>	
 		<DIV ID='ltitle-div'><IMG ID='login_title' SRC='{{STATIC_URL}}img/gamma.png'> </DIV>
